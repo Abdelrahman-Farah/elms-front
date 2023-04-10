@@ -32,7 +32,6 @@ function Register() {
       })
         .then((res) => {
           return res.json();
-          console.log('a7a 1', res.status);
           if (res.status == 201)
             return res.json();
           else

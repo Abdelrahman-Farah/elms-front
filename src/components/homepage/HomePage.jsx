@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
-import StudentsInfo from '../StudentsInfo';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -22,7 +21,6 @@ function HomePage() {
       <br /><br /><br />
       <button className="link-btn" onClick={gotoRegister}>Sign Up</button>
       <br /><br /><br />
-      <StudentsInfo/>
     </>
   );
 }

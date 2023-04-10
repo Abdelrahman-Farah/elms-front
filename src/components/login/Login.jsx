@@ -22,7 +22,6 @@ function Login() {
         },
       })
         .then((res) => {
-          console.log('a7a 1', res.status);
           if (res.status == 200)
             return res.json();
           else
