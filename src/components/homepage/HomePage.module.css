@@ -1,0 +1,4 @@
+.landing-bg {
+    background: url("./src/assets/header/header-background.png") center center no-repeat;
+    background-size: cover;
+}

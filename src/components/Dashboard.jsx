@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-function BrowseCourses() {
+function Dashboard() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -48,5 +48,6 @@ function BrowseCourses() {
         <h3>Your email is {email}</h3>
       </div>
     }
-  }
-export default BrowseCourses
+}
+
+export default Dashboard
