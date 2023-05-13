@@ -1,0 +1,207 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.topDetail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.title {
+  flex: 1;
+}
+
+.title h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.title input {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 5px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn {
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.updateButton {
+  margin-right: 10px;
+}
+
+.editActions {
+  display: flex;
+}
+
+.saveButton {
+  margin-right: 10px;
+}
+
+.cancelButton {
+  background-color: #dc3545;
+}
+
+.deleteButton{
+  background-color: #dc3545;
+  margin-right: 10px;
+}
+
+.downDetail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 20px;
+  position: relative;
+}
+
+.avatar {
+  width: 12rem;
+  height: 12rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.avatarEdit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatarButton {
+  position: absolute;
+  top: 1rem;
+  right: 0.5rem;
+  background-color: #007bff;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.avatarInput {
+  display: none;
+}
+
+.middle {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.owner {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.owner span:first-child {
+  font-weight: bold;
+}
+
+.joinCode {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.right {
+  width: 20%;
+  margin: 0 auto;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.description {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.description span {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.description p,
+.description textarea {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1.1rem;
+  margin: 0;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.description textarea {
+  display: flex;
+  flex-wrap: wrap;
+  height: 150px;
+  resize: none;
+}
+
+.description p {
+  margin-bottom: 10px;
+  max-height: 150px;
+  max-width: 25rem;
+  overflow-y: auto;
+}
+
+.creationTime {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.date {
+  margin-left: 5px;
+}
+

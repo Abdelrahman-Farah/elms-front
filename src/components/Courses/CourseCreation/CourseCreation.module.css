@@ -1,0 +1,132 @@
+/* CourseCreation.module.css */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.control label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.control input[type="text"],
+.control textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.control input[type="text"]:focus,
+.control textarea:focus {
+  outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 0 5px #66afe9;
+}
+
+.control .error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  border-radius: 50%;
+  background-color: #ddd;
+  overflow: hidden;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+
+.avatarInput {
+  width: 100%;
+  height: 100%;
+}
+
+.avatarLabel {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out;
+  border-radius: 50%;
+}
+
+.avatarLabel:hover {
+  opacity: 1;
+}
+
+.avatarLabel span {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.avatarLabel input {
+  display: none;
+}
+
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.submitButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #3e8e41;
+}
+
+.submitButton:disabled,
+.submitButton:disabled:hover,
+.submitButton:disabled:active {
+  background-color: #ccc;
+  border-color: #ccc;
+  color: #292929;
+  cursor: not-allowed;
+}
+
