@@ -15,6 +15,8 @@ import ResetPassword from './pages/auth/ResetPassword';
 import ConfirmResetPassword from './pages/auth/ConfirmResetPassword';
 
 import Dashboard from './pages/Dashboard/Dashboard';
+import Posts from './components/CourseDetails/CoursePosts/Posts/Posts';
+import CourseInformation from './components/CourseDetails/CourseInformation/CourseInformation';
 import CoursePage from './pages/CoursePage/CoursePage';
 import RootLayout from './pages/RootLayout';
 import { checkAuth } from './utils/auth';
@@ -26,12 +28,23 @@ function App() {
       element: <RootLayout />,
       children: [
         {
-          path: '/',
+          index: true,
           element: <Dashboard />,
         },
         {
-          path: '/:courseId',
+          path: ':courseId',
+          id: 'course-detail',
           element: <CoursePage />,
+          children: [
+            {
+              index: true,
+              element: <CourseInformation />,
+            },
+            {
+              path: 'posts',
+              element: <Posts />,
+            },
+          ],
         },
         // { path: '/messages', element: <Messages /> },
         // { path: '/calendar', element: <Calendar /> },

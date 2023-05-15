@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const isNotEmpty = value => value.trim() !== '';
+const isEmpty = value => value.trim().length >= 0;
 
 const CoursesCreation = () => {
   const [avatar, setAvatar] = useState(null);
@@ -26,7 +27,7 @@ const CoursesCreation = () => {
     valueChangeHandler: descriptionChangeHandler,
     inputBlurHandler: descriptionBlurHandler,
     reset: resetDescription,
-  } = useInput(isNotEmpty);
+  } = useInput(isEmpty);
 
   const formSubmitHandler = async event => {
     event.preventDefault();
