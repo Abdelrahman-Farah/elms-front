@@ -1,43 +1,104 @@
-import './App.css'
-import { Routes, Route } from 'react-router-dom'
-import Login from './components/auth/Login'
-import Register from './components/auth/Register'
-import HomePage from './components/homepage/HomePage'
+import './App.css';
+import { Routes, Route, createRoutesFromElements } from 'react-router-dom';
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
 
-import ActivateUserAccount from './components/auth/ActivateUserAccount'
-import ResetPassword from './components/auth/ResetPassword'
-import ConfirmResetPassword from './components/auth/ConfirmResetPassword'
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import HomePage from './pages/HomePage/HomePage';
 
-import Dashboard from './components/Dashboard'
+import ActivateUserAccount from './pages/auth/ActivateUserAccount';
+import ResetPassword from './pages/auth/ResetPassword';
+import ConfirmResetPassword from './pages/auth/ConfirmResetPassword';
+
+import Dashboard from './pages/Dashboard/Dashboard';
+import CoursePage from './pages/CoursePage/CoursePage';
+import RootLayout from './pages/RootLayout';
+import { checkAuth } from './utils/auth';
 
 function App() {
+  const BrowserRouter = createBrowserRouter([
+    {
+      path: '/',
+      element: <RootLayout />,
+      children: [
+        {
+          path: '/',
+          element: <Dashboard />,
+        },
+        {
+          path: '/:courseId',
+          element: <CoursePage />,
+        },
+        // { path: '/messages', element: <Messages /> },
+        // { path: '/calendar', element: <Calendar /> },
+        // { path: '/profile', element: <Profile /> },
+        // { path: '/logout', element: <Logout /> },
+      ],
+    },
+  ]);
+  const routerLogin = createBrowserRouter([
+    {
+      path: '/',
+      element: <HomePage />,
+    },
+    {
+      path: '/login',
+      element: <Login />,
+    },
+    {
+      path: '/register',
+      element: <Register />,
+    },
+    {
+      path: '/activate-user-account',
+      children: [
+        {
+          path: ':uid/:token',
+          element: <ActivateUserAccount />,
+        },
+      ],
+    },
+    {
+      path: '/reset-password',
+      element: <ResetPassword />,
+    },
+    {
+      path: '/confirm-password-reset',
+      children: [
+        {
+          path: ':uid/:token',
+          element: <ConfirmResetPassword />,
+        },
+      ],
+    },
+  ]);
+
+  // createRoutesFromElements(
+  //   <Route index path='/' element={<HomePage />}/>
+  //     <Route path='/login' element={<Login />} />
+  //     <Route path='/register' element={<Register />} />
+  //     <Route path='/activate-user-account'>
+  //       <Route path=':uid/:token' element={<ActivateUserAccount />} />
+  //     </Route>
+  //     <Route path='/reset-password' element={<ResetPassword />} />
+  //     <Route path='/confirm-password-reset'>
+  //       <Route path=':uid/:token' element={<ConfirmResetPassword />} />
+  //     </Route>
+  // )
+
+  const chooseRouter = () => {
+    if (checkAuth() === true) return <RouterProvider router={BrowserRouter} />;
+    else return <RouterProvider router={routerLogin} />;
+  };
 
   return (
     <>
-      <div className="App">
-        <Routes>
-          <Route index element={<HomePage />} />
-
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/activate-user-account">
-            <Route path=":uid/:token" element={<ActivateUserAccount />} />
-          </Route>
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/confirm-password-reset">
-            <Route path=":uid/:token" element={<ConfirmResetPassword />} />
-          </Route>
-
-
-          <Route path="/dashboard" element={<Dashboard />}>
-          </Route>
-
-
-        </Routes>
-      </div>
-
+      <div className='App'>{chooseRouter()}</div>
     </>
-  )
+  );
 }
-
-export default App
+export default App;

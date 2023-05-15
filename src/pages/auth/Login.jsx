@@ -47,7 +47,8 @@ function Login() {
       .then(
         (result) => {
           localStorage.setItem('access_token', result['access']);
-          navigate("/dashboard");
+          navigate('/');
+          window.location.reload();
         },
         (error) => {
           return error

@@ -1,14 +1,11 @@
-import React, { useState } from 'react'
-import Header from './header/Header';
+import { useState } from 'react';
 
-import NavBar from '../navbar/NavBar'
+import NavBar from '../../components/NavBar/NavBar';
+import Header from './Header/Header';
 
 import styles from './HomePage.module.css';
 
-
-
 function HomePage() {
-
   return (
     <>
       <div className={styles['landing-bg']}>
@@ -18,4 +15,4 @@ function HomePage() {
     </>
   );
 }
-export default HomePage
+export default HomePage;
