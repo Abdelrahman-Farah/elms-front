@@ -9,7 +9,7 @@ const CoursesList = props => {
   const navigate = useNavigate();
 
   const courseClickedHandler = course => {
-    navigate(`/${course.id}`, { state: { course: course } });
+    navigate(`/${course.id}`, { state: { id: course.id, title: course.title } });
   };
 
   return (

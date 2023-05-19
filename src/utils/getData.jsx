@@ -21,6 +21,26 @@ export function getCourses() {
   });
 }
 
+export function getSelectedCourses(id) {
+  return fetch(api_url + `/dashboard/course/${id}/`, {
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+      Authorization: auth,
+    },
+  }).then(response => {
+    if (response.status === 200) {
+      return response.json().then(data => {
+        return {
+          result: data,
+          status: response.status,
+        };
+      });
+    } else {
+      return response.status;
+    }
+  });
+}
+
 export function enrollCourse(JoinCode) {
   let error = false;
   return fetch(api_url + '/dashboard/enrollments/', {
@@ -112,5 +132,55 @@ export function deleteCourse(courseId) {
   })
     .then(response => {
       return  response;
+    });
+}
+
+export function getPosts(courseId) {
+  return fetch(api_url + `/dashboard/course/${courseId}/post/`, {
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+      Authorization: auth,
+    },
+  }).then(response => {
+    if (response.status === 200) {
+      return response.json().then(data => {
+        return {
+          result: data,
+          status: response.status,
+        };
+      });
+    } else {
+      return response.status;
+    }
+  });
+}
+
+export function createPost(courseId, title, description, files) {
+  let error = false;
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('description', description);
+  if (files) {
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
+  }
+  return fetch(api_url + `/dashboard/course/${courseId}/post/`, {
+    method: 'POST',
+    headers: {
+      Authorization: auth,
+    },
+    body: formData,
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        error = true;
+        return response.json();
+      }
+    })
+    .then(response => {
+      return { response, error };
     });
 }

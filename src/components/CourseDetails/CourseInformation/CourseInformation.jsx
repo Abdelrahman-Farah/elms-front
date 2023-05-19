@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import classes from './CourseInformation.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -10,20 +10,55 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { updateCourse, deleteCourse } from '../../../utils/getData';
-import { set } from 'react-hook-form';
+import {
+  updateCourse,
+  deleteCourse,
+  getSelectedCourses,
+} from '../../../utils/getData';
 
-const CourseInformation = props => {
-  const isOwner = props.course.isOwner;
+const CourseInformation = () => {
+  const { courseId } = useParams();
+  const [course, setCourse] = useState(null);
+  const [isLoading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
-  const [newTitle, setNewTitle] = useState(props.course.title);
-  const [newDescription, setNewDescription] = useState(
-    props.course.description
-  );
+  const [isOwner, setIsOwner] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
   const [newAvatar, setNewAvatar] = useState(null);
-  const [avatarUrl, setAvatarUrl] = useState(props.course.avatar);
+  const [avatarUrl, setAvatarUrl] = useState(null);
 
   const navigate = useNavigate();
+
+  const fetchCourseData = async () => {
+    setLoading(true);
+    try {
+      await getSelectedCourses(courseId).then(data => {
+        setLoading(false);
+        if (data.status === 200) {
+          setCourse(data.result);
+          const courseData = data.result;
+          setIsOwner(courseData.isOwner);
+          setCourse(courseData);
+          setNewTitle(courseData.title);
+          setNewDescription(courseData.description);
+          setNewAvatar(courseData.avatar);
+          setAvatarUrl(courseData.avatar);
+          
+          return;
+        } else {
+          toast.error('Error: check your data', {});
+          return;
+        }
+      });
+    } catch (err) {
+      setError('Something went wrong!');
+    }
+  };
+
+  useEffect(() => {
+    fetchCourseData();
+  }, []);
+
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -31,20 +66,16 @@ const CourseInformation = props => {
 
   const handleSave = async () => {
     try {
-      await updateCourse(
-        props.course.id,
-        newTitle,
-        newDescription,
-        newAvatar
-      ).then(response => {
-        console.log(response);
-        if (response.error === false) {
-          toast.success('Successfully Course Updated', { autoClose: 2000 });
-        } else {
-          toast.error('Error: check your data', {});
-          return response;
+      await updateCourse(course.id, newTitle, newDescription, newAvatar).then(
+        response => {
+          if (response.error === false) {
+            toast.success('Successfully Course Updated', { autoClose: 2000 });
+          } else {
+            toast.error('Error: check your data', {});
+            return response;
+          }
         }
-      });
+      );
     } catch (err) {
       toast.error('Error: check your data', {});
     }
@@ -54,7 +85,7 @@ const CourseInformation = props => {
 
   const handleDelete = async () => {
     try {
-      const response = await deleteCourse(props.course.id);
+      const response = await deleteCourse(course.id);
       if (response.status === 204) {
         toast.success('Successfully Course Deleted', { autoClose: 2000 });
         setTimeout(() => {
@@ -70,10 +101,10 @@ const CourseInformation = props => {
 
   const handleCancel = () => {
     setIsEditing(false);
-    setNewTitle(props.course.title);
-    setNewDescription(props.course.description);
-    setNewAvatar(props.course.avatar);
-    setAvatarUrl(props.course.avatar);
+    setNewTitle(course.title);
+    setNewDescription(course.description);
+    setNewAvatar(course.avatar);
+    setAvatarUrl(course.avatar);
   };
 
   const handleAvatarChange = event => {
@@ -81,8 +112,11 @@ const CourseInformation = props => {
       setAvatarUrl(URL.createObjectURL(event.target.files[0]));
     }
     setNewAvatar(event.target.files[0]);
-    console.log(event.target.files[0]);
   };
+
+  if (isLoading) {
+    return <h1>loading...</h1>;
+  }
 
   return (
     <div className={classes.Container}>
@@ -97,7 +131,7 @@ const CourseInformation = props => {
               value={newTitle}
             />
           ) : (
-            <h1 className={newTitle}>{newTitle}</h1>
+            <h1>{newTitle}</h1>
           )}
         </div>
         <button
@@ -156,23 +190,23 @@ const CourseInformation = props => {
           <div className={classes.owner}>
             <div>
               <span>{isOwner ? 'You are the owner ' : 'Owner: '}</span>
-              <span>{props.course.owner.username}</span>
+              <span>{course.owner.username}</span>
             </div>
             <div>
               <span>{isOwner ? 'Your email: ' : 'Owner email: '}</span>
-              <span>{props.course.owner.email}</span>
+              <span>{course.owner.email}</span>
             </div>
           </div>
 
           <div className={classes.joinCode}>
             <span>Course Join Code: </span>
-            <span>{props.course.join_code}</span>
+            <span>{course.join_code}</span>
           </div>
 
           <div className={classes.creationTime}>
             <span>Created at: </span>
             <span className={classes.date}>
-              {new Date(props.course.created_at).toLocaleString()}
+              {new Date(course.created_at).toLocaleString()}
             </span>
           </div>
         </div>

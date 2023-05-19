@@ -1,5 +1,5 @@
 import classes from './CoursesNavigator.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 const CoursesNavigator = props => {
@@ -39,6 +39,7 @@ const CoursesNavigator = props => {
       </nav>
     );
   } else if (props.role === 'enrolled') {
+    const { courseId } = useParams();
     return (
       <nav className={classes.navbar}>
         <ul>
@@ -46,10 +47,10 @@ const CoursesNavigator = props => {
             <NavLink to='/'>Courses List</NavLink>
           </li>
           <li>
-            <NavLink to='/'>Course: {props.courseTitle}</NavLink>
+            <NavLink to={`/${courseId}`}>{props.courseTitle}</NavLink>
           </li>
           <li>
-            <NavLink to='/'>Posts</NavLink>
+            <NavLink to='posts'>Posts</NavLink>
           </li>
           <li>
             <NavLink to='/'>Videos</NavLink>
