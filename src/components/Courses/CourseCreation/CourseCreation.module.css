@@ -1,17 +1,18 @@
 /* CourseCreation.module.css */
 
 .container {
-  max-width: 800px;
+  width: 60%;
   margin: 0 auto;
   padding: 20px;
+  margin-top: 1rem;
   background-color: #f2f2f2;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
 
 .container h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .control {
@@ -59,12 +60,13 @@
 }
 
 .avatarImage {
-  width: 100%;
-  height: 100%;
+  width: 10rem;
+  height: 10rem;
   object-fit: cover;
   background-size: cover;
   background-position: center;
   border-radius: 50%;
+  position: absolute;
 }
 
 .avatarInput {
@@ -94,7 +96,7 @@
   font-weight: bold;
 }
 
-.avatarLabel input {
+.avatarInput input {
   display: none;
 }
 

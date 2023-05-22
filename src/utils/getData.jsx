@@ -99,11 +99,22 @@ export function updateCourse(courseId, title, description, avatar) {
   const formData = new FormData();
   formData.append('title', title);
   formData.append('description', description);
-  if (avatar) {
+  if (avatar instanceof File) {
     formData.append('avatar', avatar);
+  } else if (typeof avatar === 'string' && avatar.startsWith('http')) {
+    // Fetch the file from the URL and append it to the FormData
+    fetch(avatar)
+      .then(response => response.blob())
+      .then(blob => {
+        const file = new File([blob], 'avatar.jpg', { type: 'image/jpeg' });
+        formData.append('avatar', file);
+      })
+      .catch(error => {
+        console.error('Error fetching avatar:', error);
+      });
   }
   return fetch(api_url + `/dashboard/course/${courseId}/`, {
-    method: 'PATCH',
+    method: 'PUT',
     headers: {
       Authorization: auth,
     },

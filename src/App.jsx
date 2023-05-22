@@ -20,6 +20,8 @@ import CourseInformation from './components/CourseDetails/CourseInformation/Cour
 import CoursePage from './pages/CoursePage/CoursePage';
 import RootLayout from './pages/RootLayout';
 import { checkAuth } from './utils/auth';
+import CourseVideos from './components/CourseDetails/CourseVideos/CourseVideos';
+import CourseFiles from './components/CourseDetails/CourseFiles/CourseFiles';
 
 function App() {
   const BrowserRouter = createBrowserRouter([
@@ -43,6 +45,14 @@ function App() {
             {
               path: 'posts',
               element: <Posts />,
+            },
+            {
+              path: 'videos',
+              element: <CourseVideos />,
+            },
+            {
+              path: 'files',
+              element: <CourseFiles />,
             },
           ],
         },

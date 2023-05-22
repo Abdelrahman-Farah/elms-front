@@ -7,13 +7,13 @@ const RootLayout = () => {
   return (
     <div className={classes.container}>
       <div>
-        <UpperNavigator />
+        <UpperNavigator style={{height:'10%'}} />
       </div>
       <div className={classes.middle}>
-        <div style={{width: 'fit-content'}}>
+        <div style={{width: '15%'}}>
           <SideNavigator />
         </div>
-        <div style={{width:'100%'}}>
+        <div style={{width:'85%', height:'100%'}}>
           <Outlet />
         </div>
       </div>

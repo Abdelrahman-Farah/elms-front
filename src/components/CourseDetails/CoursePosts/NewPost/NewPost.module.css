@@ -203,3 +203,13 @@
   font-size: 50px;
   color: #aaa;
 }
+
+
+.submitButton:disabled,
+.submitButton:disabled:hover,
+.submitButton:disabled:active {
+  background-color: #ccc;
+  border-color: #ccc;
+  color: #292929;
+  cursor: not-allowed;
+}

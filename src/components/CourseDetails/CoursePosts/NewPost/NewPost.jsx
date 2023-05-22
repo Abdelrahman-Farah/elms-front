@@ -11,7 +11,6 @@ import {
   faTrash,
   faVideo,
 } from '@fortawesome/free-solid-svg-icons';
-import { set } from 'react-hook-form';
 
 const isNotEmpty = value => value.trim() !== '';
 const isEmpty = value => value.trim().length >= 0;
@@ -60,6 +59,7 @@ const NewPost = props => {
         }
       });
     } catch (err) {
+      console.log(err);
       toast.error(err.response.detail, {});
     }
 
@@ -67,6 +67,9 @@ const NewPost = props => {
     resetDescription();
     setIsEditing(false);
     setFiles([]);
+    setFilesUrl([]);
+
+    props.refresh();
   };
 
   useEffect(() => {
@@ -202,7 +205,11 @@ const NewPost = props => {
               >
                 Cancel
               </button>
-              <button type='submit' disabled={!formIsValid}>
+              <button
+                type='submit'
+                className={classes.submitButton}
+                disabled={!formIsValid}
+              >
                 Add Post
               </button>
             </div>
