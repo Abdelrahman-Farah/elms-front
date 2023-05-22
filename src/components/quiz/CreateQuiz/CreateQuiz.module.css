@@ -6,8 +6,6 @@
   padding: 0;
   background-color: #f2f1f9;
   background-image: linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));
-  /* background-image: linear-gradient(120deg, #970D1A, #4E204D); */
-  /* background-image: linear-gradient(120deg, #2980b9, #8e44ad); */
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
@@ -18,7 +16,7 @@
 
 .quiz {
   background-color: #f2f1f9;
-  border-radius: 80px;
+  border-radius: 55px;
   padding: 50px;
   box-shadow:0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
 }
@@ -51,7 +49,6 @@
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  /* margin-bottom: 20px; */
 }
 
 .mid-input {
@@ -63,7 +60,6 @@
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  /* margin-bottom: 20px; */
 }
 
 .small-input {
@@ -75,7 +71,6 @@
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  /* margin-bottom: 20px; */
 }
 
 
@@ -87,7 +82,6 @@
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
-  /* margin-left: 8em; */
 }
 
 .plus-icon{
@@ -103,7 +97,6 @@
 
 .set-btn,
 .append-set-btn {
-  /* transition: all 4s; */
   width: 200px;
   height: 200px;
   border-radius: 12px;
@@ -112,18 +105,9 @@
   font-weight: bold;
 }
 
-.append-set-btn{
-  /* text-decoration: none;
-  border: 0px solid red; */
-}
 
 .set {
-  /* border: 4px solid slateblue; */
   padding: 15px;
-  /* margin: 7px; */
-
-  /* background-color: aquamarine; */
-  /* max-width: 90%; */
 }
 
 .submit-quiz-btn {
@@ -196,7 +180,6 @@
   width: 50px;
   height: 25px;
   background: grey;
-  /* display: block; */
   border-radius: 100px;
   position: relative;
   margin-right: 10px;
@@ -234,7 +217,6 @@
 
 .question-btn-error>div {
   border: 4px solid red !important;
-  /* color: red !important; */
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -258,15 +240,10 @@
 }
 
 .question {
-  /* border: 4px solid crimson; */
   padding: 15px;
   margin: 7px;
 }
 
-.answers-wrapper {
-  /* padding: 15px;
-  border: 4px solid greenyellow; */
-}
 
 .append-answer-btn {
   font-weight: bold;
@@ -276,8 +253,5 @@
 }
 
 .answer {
-  /* border: 4px solid greenyellow; */
-  /* padding: 15px;
-    margin: 7px; */
   margin-left: 50px;
 }

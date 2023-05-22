@@ -59,7 +59,7 @@ const CoursesNavigator = props => {
             <NavLink to='/'>Files</NavLink>
           </li>
           <li>
-            <NavLink to='/'>Exams</NavLink>
+            <NavLink to='quiz'>Quizzes</NavLink>
           </li>
           <li>
             <NavLink to='/'>Assignments</NavLink>

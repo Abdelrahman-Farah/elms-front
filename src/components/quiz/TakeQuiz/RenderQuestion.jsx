@@ -13,7 +13,7 @@ function RenderQuestion(props) {
     <div className={styles.question}>
       <div className={styles.question_body}>{props['question']['body']}</div>
       <div className={styles.answers}>
-        {props['question']['answers'].map((answer, index) => {
+        {props['question']['choices'].map((answer, index) => {
 
           return <RenderChoices
             key={answer.id}

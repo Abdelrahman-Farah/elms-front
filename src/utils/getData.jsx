@@ -1,6 +1,27 @@
 export const api_url = 'http://127.0.0.1:8000';
 export const auth = 'JWT ' + localStorage.getItem('access_token');
 
+export function checkIfOwner(classroom_id) {
+  return fetch(api_url + `/dashboard/course/${classroom_id}/is-owner/`, {
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+      Authorization: auth,
+    },
+  }).then(response => {
+    if (response.status === 200)
+      return 1;   // user is the owner
+
+    else if (response.status === 403)
+      return 0;   // user isn't owner
+
+    else if (response.status === 401)
+      return -1;  // user isn't logged in
+
+    else if (response.status === 400)
+      return -2;  // classroom not found
+  });
+}
+
 export function getCourses() {
   return fetch(api_url + '/dashboard/course/', {
     headers: {
@@ -183,4 +204,21 @@ export function createPost(courseId, title, description, files) {
     .then(response => {
       return { response, error };
     });
+}
+
+export function getQuizzes(classroom_id) {
+  return fetch(api_url + `/dashboard/course/${classroom_id}/quiz-model/`, {
+    method: "GET",
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+      Authorization: auth,
+    },
+  }).then(response => {
+    return response.json().then(data => {
+      return {
+        result: data,
+        status: response.status,
+      };
+    });
+  });
 }

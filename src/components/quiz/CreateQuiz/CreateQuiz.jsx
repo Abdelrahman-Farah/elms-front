@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
+import { useParams } from 'react-router-dom';
 
 import RenderSet from "./RenderSet";
 import Alert from 'react-bootstrap/Alert';
@@ -7,25 +8,34 @@ import Spinner from 'react-bootstrap/Spinner';
 
 import styles from "./CreateQuiz.module.css";
 
+import plus_icon from '/src/assets/quiz/create/plus-icon.svg'
+
+import { api_url, auth } from "../../../utils/getData";
+import { checkIfOwner } from "../../../utils/getData";
+
 function CreateQuiz() {
+    let { courseId } = useParams();
+
     const { register, handleSubmit, control, setError, formState: { errors }, clearErrors } = useForm();
     const { fields, append, remove } = useFieldArray({
         name: "difficulty_sets",
         control,
     });
 
-    const [isLoading, setIsLoading] = useState(false);
+
+    const [isLoading, setIsLoading] = useState(true);
     const [isCreationFinished, setIsCreationFinished] = useState(false);
 
     const [openLast, setOpenLast] = useState(false);
 
 
     async function createQuiz(data) {
-        await fetch("http://127.0.0.1:8000/quiz_base/quiz-model/", {
+        await fetch(`${api_url}/dashboard/course/${courseId}/quiz-model/`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
+                "Authorization": auth,
             },
         })
             .then((res) => {
@@ -36,11 +46,9 @@ function CreateQuiz() {
             })
             .then(
                 (result) => {
-
                     setIsCreationFinished(true)
                 },
                 (error) => {
-
                     return error
                 }
             ).then((err) => {
@@ -53,6 +61,11 @@ function CreateQuiz() {
                         setError('quiz', { type: 'custom', message: value });
                     }
                     delete quiz['non_field_errors']
+                    if (quiz['detail']) {
+                        let value = quiz['detail'];
+                        setError('quiz-detail', { type: 'custom', message: [value] });
+                    }
+                    delete quiz['detail']
 
 
                     for (let set_index in quiz['difficulty_sets']) {
@@ -113,9 +126,19 @@ function CreateQuiz() {
                         setError(quiz_key, { type: 'custom', message: value });
                     }
                 }
-                // setIsLoading(false);
+                setIsLoading(false);
             })
     }
+
+    const [isOwner, setIsOwner] = useState();
+
+    useEffect(() => {
+        checkIfOwner(courseId).then((val) => {
+            setIsOwner(val);
+            setIsLoading(false);
+        }
+        )
+    }, []);
 
     if (isCreationFinished) {
         return (
@@ -133,20 +156,32 @@ function CreateQuiz() {
         )
     }
 
+    if (isOwner !== 1) {
+        return (
+            <div className={`${styles['create-quiz-bg']} d-flex justify-content-center align-items-center`}>
+                <div className={`${styles['quiz']} d-flex justify-content-center align-items-center flex-column`} style={{textAlign: 'center', minHeight:'300px'}}>
+                    <h1 style={{ textAlign: "center", fontSize: "52px", marginBottom: "40px" }}>Create New Quiz!</h1>
+                    <h2 style={{ color: "red"}}>You don't have the permission to create quiz in this class!</h2>
+                </div>
+            </div>
+        )
+    }
     return (
         <div className={styles['create-quiz-bg']}>
-            <div className={styles.quiz}>
+            <div className={`${styles['quiz']}`}>
                 <h1 style={{ textAlign: "center", fontSize: "52px", marginBottom: "40px" }}>Create New Quiz!</h1>
                 <form
 
                     className={styles['quiz-form']}
                     onSubmit={handleSubmit((data) => {
+                        data['classroom'] = courseId
                         setIsLoading(true);
                         createQuiz(data);
                     })}
                 >
                     <div className="mb-5">
                         {errors?.[`quiz`]?.message?.map(err => <Alert key={err} variant='danger'> {err} </Alert>)}
+                        {errors?.[`quiz-detail`]?.message?.map(err => <Alert key={err} variant='danger'> {err} </Alert>)}
 
                         <div className={`${errors['title'] && styles['input-error']}`}>
                             <label className={styles.label} htmlFor="title">Title</label>
@@ -168,7 +203,7 @@ function CreateQuiz() {
 
                         <div className={`${errors['duration_in_minutes'] && styles['input-error']}`}>
                             <label className={styles.label} htmlFor="duration">Duration in minutes</label>
-                            <input className={styles['large-input']} type="number" min="1.0" id="duration" {...register("duration_in_minutes")} />
+                            <input className={styles['mid-input']} type="number" min="1.0" id="duration" {...register("duration_in_minutes")} />
                             {errors['duration_in_minutes'] && errors['duration_in_minutes'].message.map(err => <p key={err} className={styles['error-msg']}>{err}</p>)}
                         </div>
                     </div>
@@ -198,7 +233,7 @@ function CreateQuiz() {
                                 })
                             }
                             <button type="button" className={styles['append-set-btn']} onClick={() => { setOpenLast(true); append(); }}>
-                                <img className={styles['plus-icon']} src="images/plus-icon.svg" />
+                                <img className={styles['plus-icon']} src={plus_icon} />
                                 <div>Add new Set</div>
                             </button>
                         </div>
@@ -207,9 +242,6 @@ function CreateQuiz() {
 
                     <button type="submit" className={styles['submit-quiz-btn']} onClick={() => {
                         clearErrors()
-                        setTimeout(() => {
-                            setIsLoading(false)
-                        }, 2000)
                     }}
                     >
                         Create quiz

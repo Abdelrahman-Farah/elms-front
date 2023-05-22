@@ -48,7 +48,7 @@ function RenderQuestion(props) {
 
               </div>
 
-              <div className={styles['answers-wrapper']}>
+              <div>
                 {fields.map((answer, index) => {
                   return <RenderAnswer
                     key={answer.id}
