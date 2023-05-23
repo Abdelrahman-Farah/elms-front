@@ -23,6 +23,14 @@ import { checkAuth } from './utils/auth';
 import CourseVideos from './components/CourseDetails/CourseVideos/CourseVideos';
 import CourseFiles from './components/CourseDetails/CourseFiles/CourseFiles';
 
+import Quizzes from './components/quiz/Quizzes/Quizzes';
+import CreateQuiz from './components/quiz/CreateQuiz/CreateQuiz';
+import TakeQuiz from './components/quiz/TakeQuiz/TakeQuiz';
+
+import Quizzes from './components/quiz/Quizzes/Quizzes';
+import CreateQuiz from './components/quiz/CreateQuiz/CreateQuiz';
+import TakeQuiz from './components/quiz/TakeQuiz/TakeQuiz';
+
 function App() {
   const BrowserRouter = createBrowserRouter([
     {
@@ -53,7 +61,14 @@ function App() {
             {
               path: 'files',
               element: <CourseFiles />,
+            },{
+              path: 'quiz',
+              element: <Quizzes />,
             },
+            // {
+            //   path: 'quiz/create',
+            //   element: <CreateQuiz />,
+            // },
           ],
         },
         // { path: '/messages', element: <Messages /> },
@@ -61,6 +76,19 @@ function App() {
         // { path: '/profile', element: <Profile /> },
         // { path: '/logout', element: <Logout /> },
       ],
+    },
+    {
+      path: ':courseId',
+      children: [
+        {
+          path: 'quiz/create',
+          element: <CreateQuiz />,
+        },
+        {
+          path: 'quiz/:quiz_model_id/take',
+          element: <TakeQuiz />,
+        },
+      ]
     },
   ]);
   const routerLogin = createBrowserRouter([
