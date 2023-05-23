@@ -35,7 +35,7 @@ const CourseInformation = () => {
       await getSelectedCourses(courseId).then(data => {
         setLoading(false);
         if (data.status === 200) {
-          setCourse(data.result);
+          
           const courseData = data.result;
           setIsOwner(courseData.isOwner);
           setCourse(courseData);

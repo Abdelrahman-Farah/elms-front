@@ -1,4 +1,4 @@
-import { getPosts } from '../../../../utils/getData';
+import { getPosts, getSelectedCourses } from '../../../../utils/getData';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import classes from './Posts.module.css';
@@ -16,11 +16,31 @@ import {
 
 const Posts = () => {
   const { courseId } = useParams();
+  const [isOwner, setIsOwner] = useState(null);
   const [posts, setPosts] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const [videoHidden, setVideoHidden] = useState([]);
   const [docHidden, setDocHidden] = useState([]);
   const [imageHidden, setImageHidden] = useState([]);
+
+
+
+  const fetchCourseData = async () => {
+    try {
+      await getSelectedCourses(courseId).then(data => {
+        if (data.status === 200) {
+          const courseData = data.result;
+          setIsOwner(courseData.isOwner);
+          return;
+        } else {
+          toast.error('Error: check your data', {});
+          return;
+        }
+      });
+    } catch (err) {
+      setError('Something went wrong!');
+    }
+  };
 
 
   useEffect(() => {
@@ -57,6 +77,7 @@ const Posts = () => {
 
   const refresh = () => {
     fetchPostsData();
+    
   };
 
   const fetchPostsData = async () => {
@@ -79,6 +100,7 @@ const Posts = () => {
 
   useEffect(() => {
     fetchPostsData();
+    fetchCourseData();
   }, []);
 
   if (isLoading) {
@@ -196,7 +218,7 @@ const Posts = () => {
   return (
     <div>
       <ToastContainer />
-      {posts.length > 0 && posts[0].isOwner && (
+      {isOwner && (
         <NewPost courseId={courseId} refresh={refresh} />
       )}
       <div className={classes.posts}>

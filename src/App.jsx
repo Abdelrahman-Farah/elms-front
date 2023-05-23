@@ -27,9 +27,6 @@ import Quizzes from './components/quiz/Quizzes/Quizzes';
 import CreateQuiz from './components/quiz/CreateQuiz/CreateQuiz';
 import TakeQuiz from './components/quiz/TakeQuiz/TakeQuiz';
 
-import Quizzes from './components/quiz/Quizzes/Quizzes';
-import CreateQuiz from './components/quiz/CreateQuiz/CreateQuiz';
-import TakeQuiz from './components/quiz/TakeQuiz/TakeQuiz';
 
 function App() {
   const BrowserRouter = createBrowserRouter([
@@ -128,18 +125,6 @@ function App() {
     },
   ]);
 
-  // createRoutesFromElements(
-  //   <Route index path='/' element={<HomePage />}/>
-  //     <Route path='/login' element={<Login />} />
-  //     <Route path='/register' element={<Register />} />
-  //     <Route path='/activate-user-account'>
-  //       <Route path=':uid/:token' element={<ActivateUserAccount />} />
-  //     </Route>
-  //     <Route path='/reset-password' element={<ResetPassword />} />
-  //     <Route path='/confirm-password-reset'>
-  //       <Route path=':uid/:token' element={<ConfirmResetPassword />} />
-  //     </Route>
-  // )
 
   const chooseRouter = () => {
     if (checkAuth() === true) return <RouterProvider router={BrowserRouter} />;
