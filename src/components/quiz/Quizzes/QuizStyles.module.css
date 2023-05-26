@@ -60,20 +60,33 @@
 
 .card {
   width: 50em;
-  height: 270px;
+  /* height: 330px; */
   background: rgb(255, 255, 255);
   box-shadow: 0 13px 15px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   margin-top: 30px;
   transition: background-color .5s, box-shadow .5s, margin-left .5s;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  position: relative;
+
+}
+.control-buttuns-div{
+  right: 0;
+  position: absolute;
+  padding: 6px 6px 0 10px;
 }
 
-.card:hover {
-  cursor: pointer;
+.inner-card{
+
+  height: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+  margin-top: 2em;
 }
+
 
 .card:hover {
   margin-left: 2%;
@@ -105,6 +118,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding-bottom: 1em;
   align-items: flex-start;
   height: 100%;
   /* flex-grow: 1; */
@@ -113,7 +127,7 @@
 }
 
 .post-content > h2 {
-  margin-top: 25px;
+  /* margin-top: 25px; */
   margin-left: 40px;
 }
 .post-content > p {
@@ -123,7 +137,7 @@
   margin-left: 50px;
 }
 .post-header {
-  margin-top: 15px;
+  /* margin-top: 15px; */
   color: #3B3C3F;
   /* margin-left: 40px; */
   text-align: center;
@@ -148,7 +162,7 @@
   width: 650%;
   /* height: 60px; */
   margin-left: 10px;
-
+  padding: 6px 0;
 }
 
 .author-image {
@@ -176,9 +190,10 @@
 
 .quiz-state-outer{
   padding: 20px;
-  /* margin: auto; */
   width: 16em;
   margin-right: 1.2em;
+  display: flex;
+  flex-direction: column;
 }
 
 .quiz-state-inner {
@@ -190,4 +205,27 @@
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
+  transition: background-color 0.27s ease-out;
+}
+
+.quiz-state-inner-2:hover{
+  cursor: pointer;
+  background-color: #e4e6eb;
+}
+
+.separator {
+  /* width: 100%; */
+  height: 3px;
+  background-color: #d6cdcd;
+  margin: 1.1em;
+}
+
+.all-students-results{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.8em;
+}
+
+.remove-icon::before{
+  content: "\f1f8";
 }

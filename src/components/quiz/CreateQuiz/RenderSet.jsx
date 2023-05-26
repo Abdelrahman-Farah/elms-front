@@ -83,9 +83,9 @@ function RenderSet(props) {
 
                             <div style={{ "marginLeft": "20%" }}>
                                 <label style={{fontWeight: "bold"}} htmlFor={`${props.base_str}.used_questions`}>Number of used questions from this set: </label>
-                                <select defaultValue={fields.length} id={`${props.base_str}.used_questions`} {...props.register(`${props.base_str}.number_of_used_questions_from_this_set`)} >
+                                <select defaultValue={1} id={`${props.base_str}.used_questions`} {...props.register(`${props.base_str}.number_of_used_questions_from_this_set`)} required>
                                     {
-                                        arrayRange(0, fields.length, 1).map((val, index) => {
+                                        arrayRange(1, Math.max(1, fields.length), 1).map((val, index) => {
                                             return <option key={index} value={val} >{val}</option>
                                         })
                                     }

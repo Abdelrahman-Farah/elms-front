@@ -26,7 +26,8 @@ import CourseFiles from './components/CourseDetails/CourseFiles/CourseFiles';
 import Quizzes from './components/quiz/Quizzes/Quizzes';
 import CreateQuiz from './components/quiz/CreateQuiz/CreateQuiz';
 import TakeQuiz from './components/quiz/TakeQuiz/TakeQuiz';
-
+import QuizResult from './components/quiz/QuizResult/QuizResult';
+import AllQuizResults from './components/quiz/AllQuizResults/AllQuizResults';
 
 function App() {
   const BrowserRouter = createBrowserRouter([
@@ -62,10 +63,14 @@ function App() {
               path: 'quiz',
               element: <Quizzes />,
             },
-            // {
-            //   path: 'quiz/create',
-            //   element: <CreateQuiz />,
-            // },
+            {
+              path: 'quiz/:quiz_model_id/result',
+              element: <QuizResult />,
+            },
+            {
+              path: 'quiz/:quiz_model_id/all-students-results',
+              element: <AllQuizResults />,
+            },
           ],
         },
         // { path: '/messages', element: <Messages /> },
@@ -85,6 +90,7 @@ function App() {
           path: 'quiz/:quiz_model_id/take',
           element: <TakeQuiz />,
         },
+
       ]
     },
   ]);

@@ -133,10 +133,11 @@ function CreateQuiz() {
     const [isOwner, setIsOwner] = useState();
 
     useEffect(() => {
-        checkIfOwner(courseId).then((val) => {
-            setIsOwner(val);
-            setIsLoading(false);
-        }
+        checkIfOwner(courseId).then(
+            (val) => {
+                setIsOwner(val);
+                setIsLoading(false);
+            }
         )
     }, []);
 
@@ -151,7 +152,7 @@ function CreateQuiz() {
     if (isLoading) {
         return (
             <div className={`${styles['create-quiz-bg']} d-flex justify-content-center align-items-center`}>
-                <Spinner animation="border" variant="primary" />
+                <Spinner animation="border" variant="primary" style={{ width: "5.5rem", height: "5.5rem" }} />
             </div>
         )
     }
@@ -159,9 +160,9 @@ function CreateQuiz() {
     if (isOwner !== 1) {
         return (
             <div className={`${styles['create-quiz-bg']} d-flex justify-content-center align-items-center`}>
-                <div className={`${styles['quiz']} d-flex justify-content-center align-items-center flex-column`} style={{textAlign: 'center', minHeight:'300px'}}>
+                <div className={`${styles['quiz']} d-flex justify-content-center align-items-center flex-column`} style={{ textAlign: 'center', minHeight: '300px' }}>
                     <h1 style={{ textAlign: "center", fontSize: "52px", marginBottom: "40px" }}>Create New Quiz!</h1>
-                    <h2 style={{ color: "red"}}>You don't have the permission to create quiz in this class!</h2>
+                    <h2 style={{ color: "red" }}>You don't have the permission to create quiz in this class!</h2>
                 </div>
             </div>
         )

@@ -40,8 +40,8 @@ function Quizzes() {
 
     if (isLoading) {
         return (
-            <div className={`d-flex justify-content-center align-items-center`}>
-                <Spinner animation="border" variant="primary" />
+            <div className={`${styles['quizzes-bg']} d-flex justify-content-center align-items-center`}>
+                <Spinner animation="border" variant="primary" style={{ width: "5.5rem", height: "5.5rem" }}/>
             </div>
         )
     }
@@ -58,7 +58,7 @@ function Quizzes() {
                     : null
             }
 
-            {error && <Alert variant='danger'> {error} </Alert>}
+            {error ? <Alert variant='danger'> {error} </Alert> :null}
 
             <div className={styles['quizzes']}>
                 {
@@ -67,6 +67,9 @@ function Quizzes() {
                             <QuizCard
                                 key={quiz.id}
                                 quiz={quiz}
+                                isOwner={isOwner}
+                                courseId={courseId}
+                                quiz_model_id={quiz['id']}
                             />
                         )
                     })
