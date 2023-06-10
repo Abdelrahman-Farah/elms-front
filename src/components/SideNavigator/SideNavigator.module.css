@@ -14,7 +14,7 @@
 }
 
 .list li {
-  width:70% ;
+  width: 70%;
   padding: 2rem 0;
   margin: 0 auto;
 }
@@ -25,7 +25,6 @@
   text-decoration: none;
   color: #fff;
 }
-
 
 .list .active {
   background-color: #fff;
@@ -40,7 +39,7 @@
   margin: auto;
 }
 
-.logout{
+.logout {
   border-top: 1px solid #fff;
   padding: 0 !important;
 }

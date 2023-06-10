@@ -18,6 +18,8 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import CoursePage from './pages/CoursePage/CoursePage';
 import RootLayout from './pages/RootLayout';
 import { checkAuth } from './utils/auth';
+import Calendar from './pages/calendar/Calendar';
+import Messages from './pages/messages/Messages';
 
 function App() {
   const BrowserRouter = createBrowserRouter([
@@ -33,8 +35,8 @@ function App() {
           path: '/:courseId',
           element: <CoursePage />,
         },
-        // { path: '/messages', element: <Messages /> },
-        // { path: '/calendar', element: <Calendar /> },
+        { path: '/messages', element: <Messages /> },
+         { path: '/calendar', element: <Calendar /> },
         // { path: '/profile', element: <Profile /> },
         // { path: '/logout', element: <Logout /> },
       ],
