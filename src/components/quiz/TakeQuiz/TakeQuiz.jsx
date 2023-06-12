@@ -9,6 +9,7 @@ import RenderQuestion from './RenderQuestion';
 
 import styles from "./TakeQuiz.module.css";
 
+import { Timer } from '../Timer';
 import { api_url, auth } from "../../../utils/getData";
 
 function TakeQuiz() {
@@ -17,10 +18,16 @@ function TakeQuiz() {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const [quizId, setQuizId] = useState(0);
-    const [questions, setQuestions] = useState([]);
+    const [data, setData] = useState(0);
     const { register, handleSubmit, setError, formState: { errors }, control } = useForm();
-    console.log(questions);
+
+    function getEndDate() {
+        let start_date = data['start_date'];
+        let duration = data['duration_in_minutes'];
+        let end_date = new Date(new Date(start_date).getTime() + duration * 60000);
+        return end_date;
+    }
+
     async function fetchExistedQuiz() {
         return await fetch(`${api_url}/dashboard/course/${courseId}/quiz-model/${quiz_model_id}/take/`, {
             method: "GET",
@@ -41,8 +48,7 @@ function TakeQuiz() {
             })
             .then(
                 (result) => {
-                    setQuizId(result['id']);
-                    setQuestions(result['random_questions']);
+                    setData(result);
                 },
                 (error) => {
                     return error
@@ -56,7 +62,7 @@ function TakeQuiz() {
                         let value = err[key];
                         setError(key, { type: 'custom', message: [value] });
                     }
-                    setError('detail', { type: 'custom', message: ['You must log in before taking a quiz!'] });
+                    setError('detail', { type: 'custom', message: [err['detail']] });
                 }
 
                 setIsLoading(false);
@@ -84,8 +90,7 @@ function TakeQuiz() {
             })
             .then(
                 (result) => {
-                    setQuizId(result['id']);
-                    setQuestions(result['random_questions']);
+                    setData(result);
                 },
                 (error) => {
                     return error
@@ -123,7 +128,6 @@ function TakeQuiz() {
                 "Authorization": auth,
             },
         }).then((res) => {
-            console.log(res);
             setIsLoading(false);
             setIsSubmitted(true);
         })
@@ -132,8 +136,8 @@ function TakeQuiz() {
     if (isSubmitted) {
         return (
             <div className={styles['take-quiz-bg']}>
-                <div className={styles.quiz}>
-                    <h1>You have submitted the quiz Successfully</h1>
+                <div className={styles['submit-success']}>
+                    <h2>You have submitted the quiz Successfully</h2>
                 </div>
 
             </div>
@@ -144,9 +148,8 @@ function TakeQuiz() {
         return (
             <div className={styles['take-quiz-bg']}>
                 <div className={styles.quiz}>
-                    <Spinner animation="border" variant="primary" />
+                    <Spinner animation="border" variant="primary" style={{ width: "5.5rem", height: "5.5rem" }} />
                 </div>
-
             </div>
         )
 
@@ -156,34 +159,39 @@ function TakeQuiz() {
                 {errors?.['detail']?.message?.map(err => <Alert key={err} variant='danger'> {err} </Alert>)}
                 {
                     !errors?.['detail'] ?
-                        <form
-                            className={styles.quiz}
-                            onSubmit={handleSubmit((data) => {
-                                setIsLoading(true);
-                                data['quiz_id'] = quizId
+                        <>
+                            <div className={styles['timer']}>
+                                <Timer expiryTimestamp={getEndDate()} />
+                            </div>
+                            <form
+                                className={styles.quiz}
+                                onSubmit={handleSubmit((solutions) => {
+                                    setIsLoading(true);
+                                    solutions['quiz_id'] = data['id']
 
-                                for (let i = 0; i < questions.length; i++) {
-                                    data['random_questions_and_answers'][i]['random_question'] = questions[i]['random_question_id']
-                                }
-                                submitSolutions(data);
-                            })}
-                        >
-                            {questions.map((question, index) => {
-                                return <RenderQuestion
-                                    key={question.id}
+                                    for (let i = 0; i < data['random_questions'].length; i++) {
+                                        solutions['random_questions_and_answers'][i]['random_question'] = data['random_questions'][i]['random_question_id']
+                                    }
+                                    submitSolutions(solutions);
+                                })}
+                            >
+                                {data['random_questions'].map((question, index) => {
+                                    return <RenderQuestion
+                                        key={question.id}
 
-                                    control={control}
+                                        control={control}
 
-                                    index={index}
+                                        index={index}
 
-                                    register={register}
-                                    base_str={`random_questions_and_answers.${index}`}
+                                        register={register}
+                                        base_str={`random_questions_and_answers.${index}`}
 
-                                    question={question}
-                                />
-                            })}
-                            <button type="submit" className={styles['submit-quiz-solutions-btn']}>Submit</button>
-                        </form>
+                                        question={question}
+                                    />
+                                })}
+                                <button type="submit" className={styles['submit-quiz-solutions-btn']}>Submit</button>
+                            </form>
+                        </>
                         : null
                 }
 

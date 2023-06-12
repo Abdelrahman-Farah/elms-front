@@ -28,6 +28,8 @@ import TakeQuiz from './components/quiz/TakeQuiz/TakeQuiz';
 import Meeting from './components/CourseDetails/VideoMeeting/Meeting';
 import Room from './components/CourseDetails/VideoMeeting/Room';
 import Profile from './pages/ProfilePage/Profile';
+import QuizResult from './components/quiz/QuizResult/QuizResult';
+import AllQuizResults from './components/quiz/AllQuizResults/AllQuizResults';
 
 function App() {
   const BrowserRouter = createBrowserRouter([
@@ -68,16 +70,19 @@ function App() {
               path: 'meeting',
               element: <Meeting />,
             },
-            // {
-            //   path: 'quiz/create',
-            //   element: <CreateQuiz />,
-            // },
+            {
+              path: 'quiz/:quiz_model_id/result',
+              element: <QuizResult />,
+            },
+            {
+              path: 'quiz/:quiz_model_id/all-students-results',
+              element: <AllQuizResults />,
+            },
           ],
         },
         // { path: '/messages', element: <Messages /> },
         // { path: '/calendar', element: <Calendar /> },
         { path: 'profile', element: <Profile /> },
-        // { path: '/logout', element: <Logout /> },
       ],
     },
     {

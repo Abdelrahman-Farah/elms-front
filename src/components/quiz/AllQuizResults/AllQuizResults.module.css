@@ -1,0 +1,46 @@
+.wrapper {
+    padding: 5em 12em;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper > table {
+    margin-bottom: 2em;
+}
+
+.all-quiz-results-bg{
+    font-family: "Trebuchet MS",monospace;
+    margin: 0;
+    padding: 0;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    overflow: hidden;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.table-heading:hover {
+    cursor: pointer;
+}
+
+.sort-button {
+    background-color: transparent;
+    border: none;
+
+    padding: 5px 10px;
+    margin: 0;
+    line-height: 1;
+    font-size: 15px;
+    color: black;
+    cursor: pointer;
+
+    transition: transform 0.05s ease-out;
+}
+
+.sort-reverse {
+    transform: rotate(180deg);
+}

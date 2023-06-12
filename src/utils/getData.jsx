@@ -226,8 +226,21 @@ export function getQuizzes(classroom_id) {
   });
 }
 
+export function deleteQuiz(classroom_id, quiz_model_id) {
+  return fetch(api_url + `/dashboard/course/${classroom_id}/quiz-model/${quiz_model_id}`, {
+    method: "DELETE",
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+      Authorization: auth,
+    },
+  }).then(response => {
+    return response.status;
+  });
+}
+    
 export function searchCourse(searchValue) {
   return fetch(api_url + `/dashboard/course/${'?search=' + searchValue}`, {
+    method: 'GET',
     headers: {
       'content-type': 'application/json; charset=UTF-8',
       Authorization: auth,
@@ -248,6 +261,7 @@ export function searchCourse(searchValue) {
 
 export function getUserData() {
   return fetch(api_url + '/auth/users/me/', {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       Authorization: auth,
