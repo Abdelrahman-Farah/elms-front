@@ -11,6 +11,7 @@ const CourseFiles = () => {
   const { courseId } = useParams();
   const [posts, setPosts] = useState(null);
   const [isPostsLoading, setPostsLoading] = useState(true);
+  let countFiles = true;
 
   const fetchPostsData = async () => {
     setPostsLoading(true);
@@ -49,7 +50,7 @@ const CourseFiles = () => {
               file =>
                 !file.file_type.startsWith('video/') &&
                 !file.file_type.startsWith('image/')
-            );
+            );countFiles = docsFiles.length;
             return docsFiles.length > 0 ? (
               <React.Fragment key={postIndex}>
                 {docsFiles.map((file, fileIndex) => {
@@ -73,7 +74,9 @@ const CourseFiles = () => {
               </React.Fragment>
             ) : null;
           })}
+          {countFiles === 0 && <h1>No files yet</h1>}
         </>
+        
       )}
     </div>
   );
