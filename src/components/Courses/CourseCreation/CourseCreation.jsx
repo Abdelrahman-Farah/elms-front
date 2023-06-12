@@ -4,11 +4,13 @@ import classes from './CourseCreation.module.css';
 import { createCourse } from '../../../utils/getData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 const isNotEmpty = value => value.trim() !== '';
 const isEmpty = value => value.trim().length >= 0;
 
 const CoursesCreation = () => {
+  const navigate = useNavigate();
   const [avatar, setAvatar] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [formIsValid, setFormIsValid] = useState(false);
@@ -36,6 +38,7 @@ const CoursesCreation = () => {
       return;
     }
 
+
     try {
       const result = await createCourse(
         enteredTitle,
@@ -44,6 +47,9 @@ const CoursesCreation = () => {
       ).then(response => {
         if (response.error === false) {
           toast.success('Successfully Course Created', { autoClose: 2000 });
+          setTimeout(() => {
+            navigate(`/${response.response.id}`);
+          }, 1000);
         } else {
           toast.error('Error: check your data', {});
           return response;
@@ -59,8 +65,8 @@ const CoursesCreation = () => {
     setAvatarUrl(null);
   };
 
-
   useEffect(() => {
+    
     if (titleIsValid) {
       setFormIsValid(true);
     } else {
@@ -74,6 +80,7 @@ const CoursesCreation = () => {
       setAvatarUrl(URL.createObjectURL(event.target.files[0]));
     }
   };
+
 
   const courseCodeClasses = titleHasError
     ? `${classes.control} ${classes.invalid}`

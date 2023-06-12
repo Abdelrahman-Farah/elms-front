@@ -1,5 +1,4 @@
 import './App.css';
-import { Routes, Route, createRoutesFromElements } from 'react-router-dom';
 import {
   BrowserRouter,
   createBrowserRouter,
@@ -26,7 +25,9 @@ import CourseFiles from './components/CourseDetails/CourseFiles/CourseFiles';
 import Quizzes from './components/quiz/Quizzes/Quizzes';
 import CreateQuiz from './components/quiz/CreateQuiz/CreateQuiz';
 import TakeQuiz from './components/quiz/TakeQuiz/TakeQuiz';
-
+import Meeting from './components/CourseDetails/VideoMeeting/Meeting';
+import Room from './components/CourseDetails/VideoMeeting/Room';
+import Profile from './pages/ProfilePage/Profile';
 
 function App() {
   const BrowserRouter = createBrowserRouter([
@@ -58,9 +59,14 @@ function App() {
             {
               path: 'files',
               element: <CourseFiles />,
-            },{
+            },
+            {
               path: 'quiz',
               element: <Quizzes />,
+            },
+            {
+              path: 'meeting',
+              element: <Meeting />,
             },
             // {
             //   path: 'quiz/create',
@@ -70,7 +76,7 @@ function App() {
         },
         // { path: '/messages', element: <Messages /> },
         // { path: '/calendar', element: <Calendar /> },
-        // { path: '/profile', element: <Profile /> },
+        { path: 'profile', element: <Profile /> },
         // { path: '/logout', element: <Logout /> },
       ],
     },
@@ -85,7 +91,11 @@ function App() {
           path: 'quiz/:quiz_model_id/take',
           element: <TakeQuiz />,
         },
-      ]
+      ],
+    },
+    {
+      path: 'room',
+      element: <Room />,
     },
   ]);
   const routerLogin = createBrowserRouter([
@@ -124,7 +134,6 @@ function App() {
       ],
     },
   ]);
-
 
   const chooseRouter = () => {
     if (checkAuth() === true) return <RouterProvider router={BrowserRouter} />;

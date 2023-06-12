@@ -41,7 +41,7 @@ const CourseFiles = () => {
   return (
     <div className={classes.container}>
       <ToastContainer />
-      {posts && posts.length === 0 && <h1>No videos yet</h1>}
+      {posts && posts.length === 0 && <h1>No files yet</h1>}
       {posts.length > 0 && (
         <>
           {posts.map((post, postIndex) => {

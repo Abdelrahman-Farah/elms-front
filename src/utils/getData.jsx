@@ -8,17 +8,10 @@ export function checkIfOwner(classroom_id) {
       Authorization: auth,
     },
   }).then(response => {
-    if (response.status === 200)
-      return 1;   // user is the owner
-
-    else if (response.status === 403)
-      return 0;   // user isn't owner
-
-    else if (response.status === 401)
-      return -1;  // user isn't logged in
-
-    else if (response.status === 400)
-      return -2;  // classroom not found
+    if (response.status === 200) return 1; // user is the owner
+    else if (response.status === 403) return 0; // user isn't owner
+    else if (response.status === 401) return -1; // user isn't logged in
+    else if (response.status === 400) return -2; // classroom not found
   });
 }
 
@@ -161,10 +154,9 @@ export function deleteCourse(courseId) {
       'content-type': 'application/json; charset=UTF-8',
       Authorization: auth,
     },
-  })
-    .then(response => {
-      return  response;
-    });
+  }).then(response => {
+    return response;
+  });
 }
 
 export function getPosts(courseId) {
@@ -219,7 +211,7 @@ export function createPost(courseId, title, description, files) {
 
 export function getQuizzes(classroom_id) {
   return fetch(api_url + `/dashboard/course/${classroom_id}/quiz-model/`, {
-    method: "GET",
+    method: 'GET',
     headers: {
       'content-type': 'application/json; charset=UTF-8',
       Authorization: auth,
@@ -231,5 +223,118 @@ export function getQuizzes(classroom_id) {
         status: response.status,
       };
     });
+  });
+}
+
+export function searchCourse(searchValue) {
+  return fetch(api_url + `/dashboard/course/${'?search=' + searchValue}`, {
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+      Authorization: auth,
+    },
+  }).then(response => {
+    if (response.status === 200) {
+      return response.json().then(data => {
+        return {
+          result: data,
+          status: response.status,
+        };
+      });
+    } else {
+      return response.status;
+    }
+  });
+}
+
+export function getUserData() {
+  return fetch(api_url + '/auth/users/me/', {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: auth,
+    },
+  }).then(result => {
+    if (result.status === 200) {
+      return result.json().then(data => {
+        return {
+          result: data,
+          status: result.status,
+        };
+      });
+    } else {
+      return result.status;
+    }
+  });
+}
+
+export function updateUserData(firstName, lastName, profilePicture) {
+  let error = false;
+  const formData = new FormData();
+  formData.append('first_name', firstName);
+  formData.append('last_name', lastName);
+  if (profilePicture instanceof File) {
+    formData.append('profile_picture', profilePicture);
+  } else if (typeof profilePicture === 'string' && profilePicture.startsWith('http')) {
+    // Fetch the file from the URL and append it to the FormData
+    fetch(profilePicture)
+      .then(response => response.blob())
+      .then(blob => {
+        const file = new File([blob], 'avatar.jpg', { type: 'image/jpeg' });
+        formData.append('profile_picture', file);
+      })
+      .catch(error => {
+        console.error('Error fetching avatar:', error);
+      });
+  }
+  return fetch(api_url + '/auth/users/me/', {
+    method: 'PUT',
+    headers: {
+      Authorization: auth,
+    },
+    body: formData,
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        error = true;
+        return response.json();
+      }
+    })
+    .then(response => {
+      return { response, error };
+    });
+}
+
+
+export function getCourseLearners(courseId) {
+  return fetch(api_url + `/dashboard/course/${courseId}/learners/`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+      Authorization: auth,
+    },
+  }).then(response => {
+    if (response.status === 200) {
+      return response.json().then(data => {
+        return {
+          result: data,
+          status: response.status,
+        };
+      });
+    } else {
+      return response.status;
+    }
+  });
+}
+
+export function deleteLearner(courseId, learnerId) {
+  return fetch(api_url + `/dashboard/course/${courseId}/learners/${learnerId}/`, {
+    method: 'DELETE',
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+      Authorization: auth,
+    },
+  }).then(response => {
+    return response;
   });
 }

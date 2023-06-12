@@ -1,0 +1,168 @@
+.container {
+  height: 80%;
+  display: flex;
+  margin-top: 3rem;
+}
+
+.meetingDetails {
+  width: 50%;
+  height: 70%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.description {
+  font-size: 3rem;
+  padding-bottom: 1rem;
+}
+
+.meetingCreateOrJoin {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.meetingCreate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #01796b;
+  border: none;
+  border-radius: 8px;
+}
+
+.meetingCreate:hover {
+  background-color: #016e62;
+}
+
+.meetingCreate:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(1, 121, 107, 0.5);
+}
+
+.meetingCreate:active{
+  background-color: #015d53;
+}
+
+.meetingCreate .materialIcons {
+  margin-right: 0.5rem;
+}
+
+.meetingJoin{
+  padding-left: 0.75rem;
+}
+
+.meetingJoinButton{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.inputField {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin-left: 0.5rem;
+}
+
+.join {
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  max-height: 3rem;
+}
+
+.join:hover {
+  background-color: #ebebeb;
+  border-radius: 8px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.ImageContainer {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.meetingImage {
+  height: 390px;
+  border: 25px solid white;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px rgb(34, 32, 32);
+}
+
+
+.box {
+  border: 2px solid #ccc;
+  padding: 20px;
+  width: 90%;
+  margin-top: 15px;
+}
+
+.info {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.inputContainer {
+  margin-bottom: 10px;
+}
+
+.linkInput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.datetimeContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.datetimeInput {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.button:disabled,
+.button:disabled:hover {
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: not-allowed;
+}
+

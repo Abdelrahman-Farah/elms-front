@@ -1,5 +1,7 @@
 import classes from './CoursesList.module.css';
 import { useNavigate, Link } from 'react-router-dom';
+import courseDefault from '../../../assets/courseDefault.jpg';
+
 
 const CoursesList = props => {
   if (!props.courses || props.courses.length === 0) {
@@ -22,7 +24,7 @@ const CoursesList = props => {
         >
           <div className={classes.imageContainer}>
             <img
-              src={course.avatar}
+              src={course.avatar ? course.avatar : courseDefault}
               alt={course.title}
               className={classes.image}
             />

@@ -7,6 +7,7 @@
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   padding: 20px;
+  margin-bottom: 50px;
 }
 
 .topDetail {
@@ -21,8 +22,6 @@
 .title {
   flex: 1;
 }
-
-
 
 .title h1 {
   font-size: 2rem;
@@ -67,7 +66,7 @@
   background-color: #dc3545;
 }
 
-.deleteButton{
+.deleteButton {
   background-color: #dc3545;
   margin-right: 10px;
 }
@@ -207,3 +206,79 @@
   margin-left: 5px;
 }
 
+.learners {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 90%;
+  margin: 0 auto;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+.hide{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding-bottom: 1rem;
+}
+.hide h5 {
+  margin-left: 5px;
+  margin-bottom: 0 !important;
+}
+
+.hide svg {
+  font-size: 20px;
+}
+
+
+.hide:hover {
+  color: #5c5a5a;
+}
+
+.learner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #181616;
+  margin-bottom: 10px;
+}
+
+.learnersContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.learnerInfo {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.learnerInfo h5 {
+  justify-content: flex-start
+}
+
+.learnerInfo p {
+  width: 40%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.learnerActions {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.learnerActions :hover {
+  cursor: pointer;
+  color: #5c5a5a;
+}

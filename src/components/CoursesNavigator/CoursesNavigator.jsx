@@ -3,36 +3,42 @@ import { NavLink, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 const CoursesNavigator = props => {
+  const [activeTab, setActiveTab] = useState('enrolled');
+
   const changeEnrolledTabHandler = () => {
     props.onChangeTabHandler('enrolled');
+    setActiveTab('enrolled');
   };
 
   const changeOwnedTabHandler = () => {
     props.onChangeTabHandler('owned');
+    setActiveTab('owned');
   };
 
   const changeEnrollTabHandler = () => {
     props.onChangeTabHandler('enroll');
+    setActiveTab('enroll');
   };
 
   const changeCreateTabHandler = () => {
     props.onChangeTabHandler('create');
+    setActiveTab('create');
   };
 
   if (props.role === 'dashboard') {
     return (
       <nav className={classes.navbar}>
         <ul>
-          <li>
+          <li className={activeTab === 'enrolled' ? classes.active : ''}>
             <div onClick={changeEnrolledTabHandler}>Enrolled Courses</div>
           </li>
-          <li>
+          <li className={activeTab === 'owned' ? classes.active : ''}>
             <div onClick={changeOwnedTabHandler}>Owned Courses</div>
           </li>
-          <li>
+          <li className={activeTab === 'enroll' ? classes.active : ''}>
             <div onClick={changeEnrollTabHandler}>Enroll Course</div>
           </li>
-          <li>
+          <li className={activeTab === 'create' ? classes.active : ''}>
             <div onClick={changeCreateTabHandler}>Create Course</div>
           </li>
         </ul>
@@ -44,28 +50,69 @@ const CoursesNavigator = props => {
       <nav className={classes.navbar}>
         <ul>
           <li>
-            <NavLink to='/'>Courses List</NavLink>
+            <NavLink
+              to='/'
+              className={({ isActive }) => (isActive ? classes.active : null)}
+            >
+              Courses List
+            </NavLink>
           </li>
           <li>
-            <NavLink to={`/${courseId}`}>{props.courseTitle}</NavLink>
+            <NavLink
+              to={`/${courseId}`}
+              className={({ isActive }) => (isActive ? classes.active : null)}
+              end
+            >
+              {props.courseTitle}
+            </NavLink>
           </li>
           <li>
-            <NavLink to='posts'>Posts</NavLink>
+            <NavLink
+              to='posts'
+              className={({ isActive }) => (isActive ? classes.active : null)}
+            >
+              Posts
+            </NavLink>
           </li>
           <li>
-            <NavLink to='videos'>Videos</NavLink>
+            <NavLink
+              to='videos'
+              className={({ isActive }) => (isActive ? classes.active : null)}
+            >
+              Videos
+            </NavLink>
           </li>
           <li>
-            <NavLink to='files'>Files</NavLink>
+            <NavLink
+              to='files'
+              className={({ isActive }) => (isActive ? classes.active : null)}
+            >
+              Files
+            </NavLink>
           </li>
           <li>
-            <NavLink to='quiz'>Quizzes</NavLink>
+            <NavLink
+              to='quiz'
+              className={({ isActive }) => (isActive ? classes.active : null)}
+            >
+              Quizzes
+            </NavLink>
           </li>
           <li>
-            <NavLink to='/'>Assignments</NavLink>
+            <NavLink
+              to='/'
+              className={({ isActive }) => (isActive ? classes.active : null)}
+            >
+              Assignments
+            </NavLink>
           </li>
           <li>
-            <NavLink to='/'>Video Streaming</NavLink>
+            <NavLink
+              to='meeting'
+              className={({ isActive }) => (isActive ? classes.active : null)}
+            >
+              Video Meeting
+            </NavLink>
           </li>
         </ul>
       </nav>
