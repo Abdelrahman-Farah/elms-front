@@ -10,10 +10,10 @@ import ELMS from '/src/assets/ELMS.svg';
 function NavBar() {
   return (
     <nav className={styles.navbar}>
-      <a href="/">
+      <NavLink to='/'>
         <img className={styles.logo_image} src={logo} />
         <img className={styles.logo_text} src={ELMS} />
-      </a>
+      </NavLink>
 
       <div className={styles.links}>
         <NavLink to='/' className={styles.nav_link}> Home </NavLink>
