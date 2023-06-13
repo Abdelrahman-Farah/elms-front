@@ -10,7 +10,7 @@
   /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
   background-color: #ffffff;
   /* background-color: #f7f8ff; */
-  background: url("./src/assets/header/header-background.png") center center no-repeat;
+  background: url("./assets/header/header-background.png") center center no-repeat;
   background-size: cover;
 }
 
