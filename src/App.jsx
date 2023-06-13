@@ -1,7 +1,6 @@
 import './App.css';
 import {
-  BrowserRouter,
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from 'react-router-dom';
 
@@ -32,7 +31,7 @@ import QuizResult from './components/quiz/QuizResult/QuizResult';
 import AllQuizResults from './components/quiz/AllQuizResults/AllQuizResults';
 
 function App() {
-  const BrowserRouter = createBrowserRouter([
+  const BrowserRouter = createHashRouter([
     {
       path: '/',
       element: <RootLayout />,
@@ -103,7 +102,7 @@ function App() {
       element: <Room />,
     },
   ]);
-  const routerLogin = createBrowserRouter([
+  const routerLogin = createHashRouter([
     {
       path: '/',
       element: <HomePage />,

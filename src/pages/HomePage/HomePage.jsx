@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import NavBar from '../../components/NavBar/NavBar';
+import NavBar from '../../components/navbar/NavBar';
 import Header from './Header/Header';
 
 import styles from './HomePage.module.css';

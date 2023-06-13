@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import classes from './UpperNavigator.module.css';
-import logo from '../../Assets/logo.svg';
+import logo from '../../assets/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { searchCourse, getUserData } from '../../utils/getData';
@@ -59,12 +59,12 @@ const UpperNavigator = () => {
         const learnerCoursesData = response.result.learner_courses || [];
         const coursesData = [
           ...ownerCoursesData.map(course => ({
-            id: course.id,
-            title: course.title,
+            id: course?.id,
+            title: course?.title,
           })),
           ...learnerCoursesData.map(course => ({
-            id: course.id,
-            title: course.title,
+            id: course?.id,
+            title: course?.title,
           })),
         ];
         setCourses(coursesData);
