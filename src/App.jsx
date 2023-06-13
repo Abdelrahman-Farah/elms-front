@@ -18,6 +18,10 @@ import CourseInformation from './components/CourseDetails/CourseInformation/Cour
 import CoursePage from './pages/CoursePage/CoursePage';
 import RootLayout from './pages/RootLayout';
 import { checkAuth } from './utils/auth';
+
+import Calendar from './pages/calendar/Calendar';
+import Messages from './pages/messages/Messages';
+
 import CourseVideos from './components/CourseDetails/CourseVideos/CourseVideos';
 import CourseFiles from './components/CourseDetails/CourseFiles/CourseFiles';
 
@@ -79,9 +83,11 @@ function App() {
             },
           ],
         },
-        // { path: '/messages', element: <Messages /> },
-        // { path: '/calendar', element: <Calendar /> },
+                                         
+        { path: '/messages', element: <Messages /> },
+        { path: '/calendar', element: <Calendar /> },
         { path: 'profile', element: <Profile /> },
+         // { path: '/logout', element: <Logout /> },
       ],
     },
     {
