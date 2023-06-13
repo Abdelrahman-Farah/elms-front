@@ -1,5 +1,4 @@
 import classes from './Dashboard.module.css';
-import Card from '../../components/Ui/Card/Card';
 import CoursesNavigator from '../../components/CoursesNavigator/CoursesNavigator';
 import { useEffect, useState } from 'react';
 import { getCourses } from '../../utils/getData';
@@ -42,7 +41,7 @@ const Dashboard = () => {
   };
 
   return (
-    <Card className={classes.container}>
+    <div className={classes.container}>
       <CoursesNavigator onChangeTabHandler={changeTabHandler} role={'dashboard'} />
       {isLoading && <h1>Loading...</h1>}
       {error && <h1>{error}</h1>}
@@ -55,7 +54,7 @@ const Dashboard = () => {
         )}
       {!isLoading && !error && activeTab === 'enroll' && <CoursesEnrollment />}
       {!isLoading && !error && activeTab === 'create' && <CoursesCreation />}
-    </Card>
+    </div>
   );
 };
 

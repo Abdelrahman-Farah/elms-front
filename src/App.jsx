@@ -1,8 +1,6 @@
 import './App.css';
-import { Routes, Route, createRoutesFromElements } from 'react-router-dom';
 import {
-  BrowserRouter,
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from 'react-router-dom';
 
@@ -15,34 +13,102 @@ import ResetPassword from './pages/auth/ResetPassword';
 import ConfirmResetPassword from './pages/auth/ConfirmResetPassword';
 
 import Dashboard from './pages/Dashboard/Dashboard';
+import Posts from './components/CourseDetails/CoursePosts/Posts/Posts';
+import CourseInformation from './components/CourseDetails/CourseInformation/CourseInformation';
 import CoursePage from './pages/CoursePage/CoursePage';
 import RootLayout from './pages/RootLayout';
 import { checkAuth } from './utils/auth';
+
 import Calendar from './pages/calendar/Calendar';
 import Messages from './pages/messages/Messages';
 
+import CourseVideos from './components/CourseDetails/CourseVideos/CourseVideos';
+import CourseFiles from './components/CourseDetails/CourseFiles/CourseFiles';
+
+import Quizzes from './components/quiz/Quizzes/Quizzes';
+import CreateQuiz from './components/quiz/CreateQuiz/CreateQuiz';
+import TakeQuiz from './components/quiz/TakeQuiz/TakeQuiz';
+import Meeting from './components/CourseDetails/VideoMeeting/Meeting';
+import Room from './components/CourseDetails/VideoMeeting/Room';
+import Profile from './pages/ProfilePage/Profile';
+import QuizResult from './components/quiz/QuizResult/QuizResult';
+import AllQuizResults from './components/quiz/AllQuizResults/AllQuizResults';
+
 function App() {
-  const BrowserRouter = createBrowserRouter([
+  const BrowserRouter = createHashRouter([
     {
       path: '/',
       element: <RootLayout />,
       children: [
         {
-          path: '/',
+          index: true,
           element: <Dashboard />,
         },
         {
-          path: '/:courseId',
+          path: ':courseId',
+          id: 'course-detail',
           element: <CoursePage />,
+          children: [
+            {
+              index: true,
+              element: <CourseInformation />,
+            },
+            {
+              path: 'posts',
+              element: <Posts />,
+            },
+            {
+              path: 'videos',
+              element: <CourseVideos />,
+            },
+            {
+              path: 'files',
+              element: <CourseFiles />,
+            },
+            {
+              path: 'quiz',
+              element: <Quizzes />,
+            },
+            {
+              path: 'meeting',
+              element: <Meeting />,
+            },
+            {
+              path: 'quiz/:quiz_model_id/result',
+              element: <QuizResult />,
+            },
+            {
+              path: 'quiz/:quiz_model_id/all-students-results',
+              element: <AllQuizResults />,
+            },
+          ],
         },
+                                         
         { path: '/messages', element: <Messages /> },
-         { path: '/calendar', element: <Calendar /> },
-        // { path: '/profile', element: <Profile /> },
-        // { path: '/logout', element: <Logout /> },
+        { path: '/calendar', element: <Calendar /> },
+        { path: 'profile', element: <Profile /> },
+         // { path: '/logout', element: <Logout /> },
       ],
     },
+    {
+      path: ':courseId',
+      children: [
+        {
+          path: 'quiz/create',
+          element: <CreateQuiz />,
+        },
+        {
+          path: 'quiz/:quiz_model_id/take',
+          element: <TakeQuiz />,
+        },
+      ],
+    },
+    {
+      path: 'room',
+      element: <Room />,
+    },
   ]);
-  const routerLogin = createBrowserRouter([
+  const routerLogin = createHashRouter([
     {
       path: '/',
       element: <HomePage />,
@@ -78,19 +144,6 @@ function App() {
       ],
     },
   ]);
-
-  // createRoutesFromElements(
-  //   <Route index path='/' element={<HomePage />}/>
-  //     <Route path='/login' element={<Login />} />
-  //     <Route path='/register' element={<Register />} />
-  //     <Route path='/activate-user-account'>
-  //       <Route path=':uid/:token' element={<ActivateUserAccount />} />
-  //     </Route>
-  //     <Route path='/reset-password' element={<ResetPassword />} />
-  //     <Route path='/confirm-password-reset'>
-  //       <Route path=':uid/:token' element={<ConfirmResetPassword />} />
-  //     </Route>
-  // )
 
   const chooseRouter = () => {
     if (checkAuth() === true) return <RouterProvider router={BrowserRouter} />;

@@ -1,6 +1,7 @@
 .navbar {
   background-color: #333;
   overflow: hidden;
+  margin-bottom: 10px;
 }
 
 .navbar ul {
@@ -24,7 +25,7 @@
 }
 
 .navbar div:hover {
-  background-color: #ddd;
+  background-color: #a49f9f;
   color: #333;
 }
 
@@ -43,4 +44,11 @@
 .navbar .active {
   background-color: #ddd;
   color: #333;
+}
+
+.active {
+  background-color: #ddd;
+  & > div {
+    color: #333;
+  }
 }

@@ -1,0 +1,216 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 1rem;
+}
+
+.topDetail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.username {
+  flex: 1;
+}
+
+
+
+.username h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+
+.btn {
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.updateButton {
+  margin-right: 10px;
+}
+
+.editActions {
+  display: flex;
+}
+
+.saveButton {
+  margin-right: 10px;
+}
+
+.cancelButton {
+  background-color: #dc3545;
+}
+
+
+
+.downDetail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 20px;
+  position: relative;
+}
+
+.profilePicture {
+  width: 12rem;
+  height: 12rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.profilePictureEdit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profilePictureButton {
+  position: absolute;
+  top: 1rem;
+  right: 0.5rem;
+  background-color: #007bff;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.profilePictureInput {
+  display: none;
+}
+
+.middle {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+  gap: 20px;
+}
+
+.email{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  width: 100%;
+  border-bottom: 1px solid #1a1212;
+}
+
+.email h3{
+  margin: 0;
+  width: 40%;
+}
+
+.email p{
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #888888;
+  font-weight: normal;
+  font-size: 1.4rem; 
+  width: 60%;
+}
+
+.firstName{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  width: 100%;
+  border-bottom: 1px solid #1a1212;
+}
+
+.firstName h3{
+  margin: 0;
+  width: 40%;
+}
+
+.firstName p,
+.firstName input {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #888888;
+  font-weight: normal;
+  font-size: 1.4rem; 
+  width: 60%;
+}
+
+.firstName input {
+  border: none;
+  outline: none;
+}
+
+
+.lastName{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.lastName h3{
+  margin: 0;
+  width: 40%;
+}
+
+.lastName p,
+.lastName input {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #888888;
+  font-weight: normal;
+  font-size: 1.4rem; 
+  width: 60%;
+}
+
+.lastName input {
+  border: none;
+  outline: none;
+}

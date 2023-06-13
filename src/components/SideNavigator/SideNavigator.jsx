@@ -20,8 +20,7 @@ const SideNavigator = () => {
             className={({ isActive }) => (isActive ? classes.active : null)}
             end
           >
-            <FontAwesomeIcon icon={faThLarge} />
-            Dashboard
+            <FontAwesomeIcon icon={faThLarge} /> <span>Dashboard</span>
           </NavLink>
         </li>
         <li>
@@ -29,8 +28,7 @@ const SideNavigator = () => {
             to='/messages'
             className={({ isActive }) => (isActive ? classes.active : null)}
           >
-            <FontAwesomeIcon icon={faEnvelope} />
-            Messages
+            <FontAwesomeIcon icon={faEnvelope} /> <span>Messages</span>
           </NavLink>
         </li>
         <li>
@@ -38,23 +36,21 @@ const SideNavigator = () => {
             to='/calendar'
             className={({ isActive }) => (isActive ? classes.active : null)}
           >
-            <FontAwesomeIcon icon={faCalendarDays} />
-            Calendar
+            <FontAwesomeIcon icon={faCalendarDays} /> <span>Calendar</span>
           </NavLink>
         </li>
         <li>
           <NavLink
-            to='/profile'
+            to='profile'
             className={({ isActive }) => (isActive ? classes.active : null)}
           >
-            <FontAwesomeIcon icon={faUser} />
-            Profile
+            <FontAwesomeIcon icon={faUser} /> <span>Profile</span>
           </NavLink>
         </li>
         <li className={classes.logout} onClick={() => logout()}>
           <NavLink to='/'>
-            <FontAwesomeIcon icon={faArrowRightFromBracket} />
-            Logout
+            <FontAwesomeIcon icon={faArrowRightFromBracket} />{' '}
+            <span>Logout</span>
           </NavLink>
         </li>
       </ul>
