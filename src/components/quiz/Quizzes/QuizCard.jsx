@@ -152,11 +152,10 @@ function QuizCard(props) {
                             </h2>
                             {
                                 !props.isOwner && (
-                                    <p style={{ color: "grey", fontSize: "14px", margin: "0" }}>
+                                    <p style={{ color: "#d45753", fontSize: "17px", margin: "0" }}>
                                         {
                                             time_state == -1 ? "Click to see your result!" :
-                                                time_state == 0 ? "Click now to take the quiz." :
-                                                    ""
+                                                time_state == 0 ? "Click now to take the quiz." : ""
                                         }
                                     </p>
                                 )
@@ -183,9 +182,9 @@ function QuizCard(props) {
                     time_state == 0
                         ? (
                             <>
-                                <div className={styles['separator']} style={{margin: "0 1em 0.8em 1em"}}></div>
+                                <div className={styles['separator']} style={{ margin: "0 1em 0.8em 1em" }}></div>
 
-                                <div style={{ color: card_color}}>
+                                <div style={{ color: card_color }}>
                                     <Timer expiryTimestamp={end_date} />
                                 </div>
                             </>
