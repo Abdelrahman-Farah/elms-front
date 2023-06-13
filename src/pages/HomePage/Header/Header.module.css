@@ -3,6 +3,8 @@
     /* background: url('../images/header-background.png') center center no-repeat; */
     background-size: cover;
     color: #2b2b4f;
+    max-width: 72em;
+    margin: auto;
 }
 
 .row {

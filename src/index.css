@@ -10,6 +10,8 @@
   /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
   background-color: #ffffff;
   /* background-color: #f7f8ff; */
+  background: url("./src/assets/header/header-background.png") center center no-repeat;
+  background-size: cover;
 }
 
 ::-webkit-scrollbar-track {
@@ -26,14 +28,12 @@
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0.44, rgb(122, 153, 217)),
-    color-stop(0.72, rgb(73, 125, 189)),
-    color-stop(0.86, rgb(28, 58, 148))
-  );
+  background-image: -webkit-gradient(linear,
+      left bottom,
+      left top,
+      color-stop(0.44, rgb(122, 153, 217)),
+      color-stop(0.72, rgb(73, 125, 189)),
+      color-stop(0.86, rgb(28, 58, 148)));
 }
 
 .App {
@@ -50,8 +50,7 @@ select {
   min-width: 80px;
   padding: 8px 16px;
   border-radius: 3px;
-  background: #ffffff url('https://i.imgur.com/hRbauFc.png') no-repeat scroll
-    right center;
+  background: #ffffff url('https://i.imgur.com/hRbauFc.png') no-repeat scroll right center;
 }
 
 select:hover,
