@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 
@@ -111,14 +111,25 @@ function Login() {
                   <input {...register("username")} type="text" placeholder="Username" id="username" name="username" required />
 
                   <input {...register("password")} type="password" placeholder="Password" id="password" name="password" required />
-                  <a className={styles['forgot']} href='/reset-password'><div className="forgot" >Forget Password?</div></a>
+
+                  <NavLink to='/reset-password' className={styles['forgot']}>
+                    <div className="forgot" >Forget Password?</div>
+                  </NavLink>
+
                 </div>
 
                 <button className={styles['auth-btn']} type="submit" onClick={() => { clearErrors(); }}>Log In</button>
                 {errors['login'] && <p className={styles['error-msg']}>{errors['login'].message}</p>}
 
               </form>
-              <p className={styles['new-member']} >New Member? <a href="/register" className={styles['new-member-link']}>sign up</a></p>
+
+
+              <p className={styles['new-member']} >
+                <span>New Member? </span>
+                <NavLink to='/register' className={styles['new-member-link']}>
+                  sign up
+                </NavLink>
+              </p>
 
             </div>
 
@@ -129,7 +140,7 @@ function Login() {
         <Modal show={showResendCodeModal} onHide={handleClose} size="md" centered >
           <Modal.Body>
             <div className={styles['activation-modal']}>
-              <img className={styles['reset-password-img']} src={email_sent}/>
+              <img className={styles['reset-password-img']} src={email_sent} />
 
               <h2 className='mb-5'>Your account is not active</h2>
               <h5>An email with Activation link is sent to you again</h5>

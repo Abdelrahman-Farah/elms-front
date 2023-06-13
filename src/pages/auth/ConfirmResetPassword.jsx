@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 import { useForm } from "react-hook-form";
 
@@ -68,10 +68,17 @@ function ConfirmResetPassword() {
                     <div className={styles['register-form-card']}>
                         <img src={card_top} className={styles['form-card-top-image']} alt="" />
 
-                        <div className={styles['card-content']}>
+                        <div className={`${styles['card-content']} mt-5`}>
                             <h2>Your Password has changed successfully!</h2>
                             <br />
-                            <h4><p className={styles['new-member']} >Now you can <a href="/login" className={styles['new-member-link']}>Log in</a></p></h4>
+                            <h4>
+                                <p className={styles['new-member']}>
+                                    <span>Now you can </span>
+                                    <NavLink to='/login' className={styles['new-member-link']}>
+                                        Log in
+                                    </NavLink>
+                                </p>
+                            </h4>
                         </div>
                     </div>
                 </div>
@@ -106,7 +113,7 @@ function ConfirmResetPassword() {
                         {errors['uid']?.message?.map(err => <Alert key={err} variant='danger'> {err}<br />{`Please check the link.`}  </Alert>)}
                         {errors['token']?.message?.map(err => <Alert key={err} variant='danger'> {err}<br />{`Please check the link.`}  </Alert>)}
 
-                        <img className={styles['reset-password-img']} src={confirm_reset_password_img}/>
+                        <img className={styles['reset-password-img']} src={confirm_reset_password_img} />
 
                         <form className={styles['register-form']} onSubmit={handleSubmit((data) => {
                             setIsLoading(true);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 
@@ -60,7 +60,12 @@ function ResetPassword() {
                         <img className={styles['reset-password-img']} src={reset_password_img} />
 
                         <h5 style={{ textAlign: 'center' }}>If the entered email is registered in our database, then a mail will be sent to you to reset your password.</h5>
-                        <p className={styles['new-member']} >Go to <a href="/" className={styles['new-member-link']}>Home Page</a></p>
+                        <p className={styles['new-member']} >
+                            <span>Go to </span>
+                            <NavLink to='/' className={styles['new-member-link']}>
+                                Home Page
+                            </NavLink>
+                        </p>
                     </div>
                 </div>
             </div>

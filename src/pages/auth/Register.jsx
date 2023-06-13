@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 
@@ -107,7 +107,12 @@ function Register() {
 
               <button className={styles['auth-btn']}>Register</button>
             </form>
-            <p className={styles['new-member']} >Already have an account? <a href="/login" className={styles['new-member-link']}>Log in</a></p>
+            <p className={styles['new-member']} >
+              <span>Already have an account? </span>
+              <NavLink to='/login' className={styles['new-member-link']}>
+                Log in
+              </NavLink>
+            </p>
           </div>
         </div>
       </div>

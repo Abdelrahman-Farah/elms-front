@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 import Spinner from 'react-bootstrap/Spinner';
 
@@ -63,10 +63,17 @@ function Register() {
                     <div className={styles['register-form-card']}>
                         <img src={card_top} className={styles['form-card-top-image']} alt="" />
 
-                        <div className={styles['card-content']}>
+                        <div className={`${styles['card-content']} mt-5`}>
                             <h2>Your Account has been Activated successfully!</h2>
                             <br />
-                            <h4><p className={styles['new-member']} >Now you can <a href="/login" className={styles['new-member-link']}>Log in</a></p></h4>
+                            <h4>
+                                <p className={styles['new-member']}>
+                                    <span>Now you can </span>
+                                    <NavLink to='/login' className={styles['new-member-link']}>
+                                        Log in
+                                    </NavLink>
+                                </p>
+                            </h4>
                         </div>
                     </div>
                 </div>
@@ -78,7 +85,7 @@ function Register() {
             <div className={styles['auth-bg']}>
                 <div className={styles['auth-cards']} >
                     <div className={styles['register-form-card']}>
-                    <img src={card_top} className={styles['form-card-top-image']} alt="" />
+                        <img src={card_top} className={styles['form-card-top-image']} alt="" />
 
                         <div style={{ "alsignItems": "start" }}>
                             <h2 style={{ "color": "red" }}>An error has occured while activating your account</h2>
