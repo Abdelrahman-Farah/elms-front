@@ -95,7 +95,6 @@ function Login() {
             <div className={styles['image-card']}>
               <img src={login_img_card} alt="Login" />
               <h2>Login to join our Community</h2>
-              {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> */}
             </div>
 
             <div className={styles['login-form-card']}>
