@@ -1,4 +1,4 @@
-export const api_url = 'http://127.0.0.1:8000';
+export const api_url = 'https://elms.fly.dev';
 export const auth = 'JWT ' + localStorage.getItem('access_token');
 
 export function checkIfOwner(classroom_id) {
@@ -237,7 +237,7 @@ export function deleteQuiz(classroom_id, quiz_model_id) {
     return response.status;
   });
 }
-    
+
 export function searchCourse(searchValue) {
   return fetch(api_url + `/dashboard/course/${'?search=' + searchValue}`, {
     method: 'GET',
