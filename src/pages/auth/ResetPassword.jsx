@@ -10,6 +10,7 @@ import styles from './AuthStyles.module.css'
 import card_top from '/src/assets/auth/card-top.png';
 import reset_password_img from '../../assets/auth/reset-password.png';
 
+import { api_url } from '../../utils/getData';
 
 function ResetPassword() {
     const { register, handleSubmit, setError, formState: { errors } } = useForm();
@@ -18,7 +19,7 @@ function ResetPassword() {
     const [isSubmitFinished, setIsSubmitFinished] = useState(false);
 
     async function fetchData(data) {
-        await fetch("http://127.0.0.1:8000/core/users/reset_password/", {
+        await fetch(`${api_url}/core/users/reset_password/`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {

@@ -12,6 +12,7 @@ import styles from './AuthStyles.module.css'
 import card_top from '/src/assets/auth/card-top.png';
 import confirm_reset_password_img from '/src/assets/auth/confirm-password-reset.png';
 
+import { api_url } from '../../utils/getData';
 
 function ConfirmResetPassword() {
     let { uid } = useParams();
@@ -25,7 +26,7 @@ function ConfirmResetPassword() {
     // const [errors, setErrors] = useState([]);
 
     async function fetchData(data) {
-        await fetch("http://127.0.0.1:8000/auth/users/reset_password_confirm/", {
+        await fetch(`${api_url}/auth/users/reset_password_confirm/`, {
             method: "POST",
             body: JSON.stringify({
                 uid: uid,

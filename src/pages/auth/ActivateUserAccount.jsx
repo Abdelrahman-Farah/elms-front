@@ -8,6 +8,7 @@ import styles from './AuthStyles.module.css'
 
 import card_top from '/src/assets/auth/card-top.png';
 
+import { api_url } from '../../utils/getData';
 
 function Register() {
     let { uid } = useParams();
@@ -18,7 +19,7 @@ function Register() {
     const [errors, setErrors] = useState([]);
 
     async function fetchData() {
-        await fetch("http://127.0.0.1:8000/auth/users/activation/", {
+        await fetch(`${api_url}/auth/users/activation/`, {
             method: "POST",
             body: JSON.stringify({
                 uid: uid,

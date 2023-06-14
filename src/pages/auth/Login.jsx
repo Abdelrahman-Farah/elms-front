@@ -13,6 +13,7 @@ import card_top from '/src/assets/auth/card-top.png';
 import login_img_card from '/src/assets/auth/login-img-card.png';
 import email_sent from '/src/assets/auth/email-sent.png';
 
+import { api_url } from '../../utils/getData';
 
 function Login() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function Login() {
   const [isLoading, setIsLoading] = useState(false);
 
   async function fetchData(data) {
-    await fetch("http://127.0.0.1:8000/core/jwt/create/", {
+    await fetch(`${api_url}/core/jwt/create/`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
