@@ -1,7 +1,6 @@
 import './App.css';
 import {
-  BrowserRouter,
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from 'react-router-dom';
 
@@ -19,6 +18,10 @@ import CourseInformation from './components/CourseDetails/CourseInformation/Cour
 import CoursePage from './pages/CoursePage/CoursePage';
 import RootLayout from './pages/RootLayout';
 import { checkAuth } from './utils/auth';
+
+import Calendar from './pages/calendar/Calendar';
+import Messages from './pages/messages/Messages';
+
 import CourseVideos from './components/CourseDetails/CourseVideos/CourseVideos';
 import CourseFiles from './components/CourseDetails/CourseFiles/CourseFiles';
 
@@ -32,7 +35,7 @@ import QuizResult from './components/quiz/QuizResult/QuizResult';
 import AllQuizResults from './components/quiz/AllQuizResults/AllQuizResults';
 
 function App() {
-  const BrowserRouter = createBrowserRouter([
+  const BrowserRouter = createHashRouter([
     {
       path: '/',
       element: <RootLayout />,
@@ -80,9 +83,11 @@ function App() {
             },
           ],
         },
-        // { path: '/messages', element: <Messages /> },
-        // { path: '/calendar', element: <Calendar /> },
+                                         
+        { path: '/messages', element: <Messages /> },
+        { path: '/calendar', element: <Calendar /> },
         { path: 'profile', element: <Profile /> },
+         // { path: '/logout', element: <Logout /> },
       ],
     },
     {
@@ -103,7 +108,7 @@ function App() {
       element: <Room />,
     },
   ]);
-  const routerLogin = createBrowserRouter([
+  const routerLogin = createHashRouter([
     {
       path: '/',
       element: <HomePage />,

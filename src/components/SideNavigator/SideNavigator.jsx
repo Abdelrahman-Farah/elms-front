@@ -33,7 +33,7 @@ const SideNavigator = () => {
         </li>
         <li>
           <NavLink
-            to='calendar'
+            to='/calendar'
             className={({ isActive }) => (isActive ? classes.active : null)}
           >
             <FontAwesomeIcon icon={faCalendarDays} /> <span>Calendar</span>

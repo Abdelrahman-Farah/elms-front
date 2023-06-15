@@ -59,12 +59,12 @@ const UpperNavigator = () => {
         const learnerCoursesData = response.result.learner_courses || [];
         const coursesData = [
           ...ownerCoursesData.map(course => ({
-            id: course.id,
-            title: course.title,
+            id: course?.id,
+            title: course?.title,
           })),
           ...learnerCoursesData.map(course => ({
-            id: course.id,
-            title: course.title,
+            id: course?.id,
+            title: course?.title,
           })),
         ];
         setCourses(coursesData);

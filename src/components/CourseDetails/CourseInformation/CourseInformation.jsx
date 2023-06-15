@@ -89,7 +89,7 @@ const CourseInformation = () => {
 
   const handleSave = async () => {
     try {
-      await updateCourse(course.id, newTitle, newDescription, newAvatar).then(
+      await updateCourse(course?.id, newTitle, newDescription, newAvatar).then(
         response => {
           if (response.error === false) {
             toast.success('Successfully Course Updated', { autoClose: 2000 });
@@ -108,7 +108,7 @@ const CourseInformation = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await deleteCourse(course.id);
+      const response = await deleteCourse(course?.id);
       if (response.status === 204) {
         toast.success('Successfully Course Deleted', { autoClose: 2000 });
         setTimeout(() => {
@@ -124,7 +124,7 @@ const CourseInformation = () => {
 
   const handelDeleteLearner = async learnerId => {
     try {
-      const response = await deleteLearner(course.id, learnerId);
+      const response = await deleteLearner(course?.id, learnerId);
       if (response.status === 204) {
         toast.success('Successfully Learner Deleted', { autoClose: 2000 });
         fetchLearners();
@@ -138,10 +138,10 @@ const CourseInformation = () => {
 
   const handleCancel = () => {
     setIsEditing(false);
-    setNewTitle(course.title);
-    setNewDescription(course.description);
-    setNewAvatar(course.avatar);
-    setAvatarUrl(course.avatar);
+    setNewTitle(course?.title);
+    setNewDescription(course?.description);
+    setNewAvatar(course?.avatar);
+    setAvatarUrl(course?.avatar);
   };
 
   const handleAvatarChange = event => {
@@ -232,23 +232,23 @@ const CourseInformation = () => {
             <div className={classes.owner}>
               <div>
                 <span>{isOwner ? 'You are the owner ' : 'Owner: '}</span>
-                <span>{course.owner.username}</span>
+                <span>{course?.owner?.username}</span>
               </div>
               <div>
                 <span>{isOwner ? 'Your email: ' : 'Owner email: '}</span>
-                <span>{course.owner.email}</span>
+                <span>{course?.owner?.email}</span>
               </div>
             </div>
 
             <div className={classes.joinCode}>
               <span>Course Join Code: </span>
-              <span>{course.join_code}</span>
+              <span>{course?.join_code}</span>
             </div>
 
             <div className={classes.creationTime}>
               <span>Created at: </span>
               <span className={classes.date}>
-                {new Date(course.created_at).toLocaleString()}
+                {new Date(course?.created_at).toLocaleString()}
               </span>
             </div>
           </div>

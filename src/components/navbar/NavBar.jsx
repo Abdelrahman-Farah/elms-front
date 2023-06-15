@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 
 import styles from "./NavBar.module.css";
 
@@ -9,20 +10,31 @@ import ELMS from '/src/assets/ELMS.svg';
 function NavBar() {
   return (
     <nav className={styles.navbar}>
-      <a className="" href="index.html">
-          <img className={styles.logo_image} src={logo} />
-          <img className={styles.logo_text} src={ELMS} />
-        </a>
+      <NavLink to='/'>
+        <img className={styles.logo_image} src={logo} />
+        <img className={styles.logo_text} src={ELMS} />
+      </NavLink>
 
-        <div className={styles.links}>
-          <a className={styles.nav_link} href="#header">Home</a>
-          <a className={styles.nav_link} href="#features">Features</a>
-          <a className={styles.nav_link} href="#details">Details</a>
-          <a className={styles.nav_link} href="#video">Video</a>
+      <div className={styles.links}>
+        <NavLink to='/' className={styles.nav_link}> Home </NavLink>
+        <NavLink to='/' className={styles.nav_link}> Features </NavLink>
+        <NavLink to='/' className={styles.nav_link}> Details </NavLink>
+        <NavLink to='/' className={styles.nav_link}> Video </NavLink>
 
-          <a className={`${styles.btn} ${styles.login_btn}`} href="/login">Log in</a>
-          <a className={`${styles.btn} ${styles.signup_btn}`} href="/register">Sign Up</a>
-        </div>
+
+        <NavLink
+          to='login'
+          className={`${styles.btn} ${styles.login_btn}`}
+        >
+          Login
+        </NavLink>
+        <NavLink
+          to='register'
+          className={`${styles.btn} ${styles.signup_btn}`}
+        >
+          Sign Up
+        </NavLink>
+      </div>
     </nav>
   )
 }

@@ -10,7 +10,6 @@
   color: black;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
 }
 
@@ -60,7 +59,6 @@
 
 .card {
   width: 50em;
-  /* height: 330px; */
   background: rgb(255, 255, 255);
   box-shadow: 0 13px 15px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
@@ -121,13 +119,10 @@
   padding-bottom: 1em;
   align-items: flex-start;
   height: 100%;
-  /* flex-grow: 1; */
   width: 65%;
-  /* padding: 10px 0 0 40px; */
 }
 
 .post-content > h2 {
-  /* margin-top: 25px; */
   margin-left: 40px;
 }
 .post-content > p {
@@ -137,9 +132,7 @@
   margin-left: 50px;
 }
 .post-header {
-  /* margin-top: 15px; */
   color: #3B3C3F;
-  /* margin-left: 40px; */
   text-align: center;
 }
 
@@ -155,12 +148,10 @@
 
   margin-top: 5px;
   border-radius: 10px;
-  /* margin-left: 20px; */
 }
 
 .author-content {
   width: 650%;
-  /* height: 60px; */
   margin-left: 10px;
   padding: 6px 0;
 }
@@ -168,7 +159,6 @@
 .author-image {
   width: 50px;
   height: 50px;
-  /* border-radius: 100%; */
   margin-left: 10px;
   margin-top: 5px;
 }
@@ -204,7 +194,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
+  text-align: center;
   transition: background-color 0.27s ease-out;
 }
 
@@ -214,7 +204,6 @@
 }
 
 .separator {
-  /* width: 100%; */
   height: 3px;
   background-color: #d6cdcd;
   margin: 1.1em;

@@ -32,7 +32,6 @@
   gap: 5px;
 }
 
-
 .list .active {
   background-color: #fff;
   color: #0e111e;
@@ -44,7 +43,7 @@
   border-radius: 5px;
 }
 
-.logout{
+.logout {
   border-top: 1px solid #fff;
   padding: 0 !important;
 }

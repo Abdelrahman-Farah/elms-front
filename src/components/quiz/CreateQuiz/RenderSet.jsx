@@ -113,16 +113,13 @@ function RenderSet(props) {
                         </Accordion>
                         <button type="button" className={styles['append-question-btn']} onClick={() => { append() }}>Add Question</button>
 
-                        {/* <button type="button" onClick={}>Remove set</button> */}
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" onClick={() => props.remove(props.index)}>
                         Delete set
                     </Button>
-                    {/* <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button> */}
+
                     <Button variant="primary" onClick={handleClose}>
                         Save Changes
                     </Button>
