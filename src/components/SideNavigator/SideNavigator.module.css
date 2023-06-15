@@ -48,3 +48,12 @@
   border-top: 1px solid #fff;
   padding: 0 !important;
 }
+
+@media screen and (max-width: 500px) {
+  .list li svg{
+    margin: 0 auto;
+  }
+  .list li span{
+    display: none;
+  }
+}

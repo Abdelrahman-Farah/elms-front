@@ -5,7 +5,7 @@ import { faVideo, faKeyboard } from '@fortawesome/free-solid-svg-icons';
 import meetPeople from '../../../assets/meetPeople.jpg';
 import useInput from '../../../hooks/useInput';
 import { Link, useParams } from 'react-router-dom';
-import { checkIfOwner } from '../../../utils/getData';
+import { checkIfOwner, sendMeetingLink } from '../../../utils/getData';
 
 const isNotEmpty = value => value.trim() !== '' && value.length === 8;
 const linkIsNotEmpty = value => value.trim() !== '';
@@ -15,7 +15,6 @@ const Meeting = () => {
   const [isOwner, setIsOwner] = useState(false);
   const startDateTimeRef = useRef(null);
   const endDateTimeRef = useRef(null);
-
 
   const {
     value: enteredMeetingLink,
@@ -55,8 +54,18 @@ const Meeting = () => {
     const startDateTime = startDateTimeRef.current.value;
     const endDateTime = endDateTimeRef.current.value;
 
-    console.log(startDateTime);
-    console.log(endDateTime); 
+    try {
+      const result = await sendMeetingLink(
+        courseId,
+        enteredMeetingLink,
+        startDateTime,
+        endDateTime
+      ).then(response => {
+        console.log(response);
+      });
+    } catch (error) {
+      console.error(error);
+    }
 
     meetingLinkReset();
   };
@@ -68,7 +77,6 @@ const Meeting = () => {
     };
     checkIfOwnerHandler();
   }, [courseId]);
-
 
   const getCurrentDateTime = () => {
     const now = new Date();

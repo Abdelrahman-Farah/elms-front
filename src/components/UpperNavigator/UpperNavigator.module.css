@@ -1,4 +1,4 @@
-.upperNavigator{
+.upperNavigator {
   display: flex;
   width: 100%;
   height: 5.5rem;
@@ -11,7 +11,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.left{
+.left {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -20,7 +20,7 @@
   padding: 0 1rem;
 }
 
-.logo{
+.logo {
   width: 10%;
   height: 3rem;
   margin-left: 2rem;
@@ -30,20 +30,20 @@
   cursor: pointer;
 }
 
-.logoImage{
+.logoImage {
   width: 100%;
   height: 100%;
   color: #fff;
   margin-right: 0.5rem;
 }
 
-.siteName{
+.siteName {
   font-size: 2rem;
   font-weight: 600;
   color: #fff;
 }
 
-.searchBarContainer{
+.searchBarContainer {
   position: relative;
   width: 60%;
   display: flex;
@@ -100,8 +100,8 @@
   background-color: #716464;
 }
 
-.resultsList{
-  position: absolute; 
+.resultsList {
+  position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
@@ -115,16 +115,16 @@
   overflow-y: auto;
 }
 
-.searchResult{
+.searchResult {
   padding: 10px 20px;
 }
 
-.searchResult:hover{
+.searchResult:hover {
   background-color: #efefef;
   cursor: pointer;
 }
 
-.right{
+.right {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -134,7 +134,7 @@
   margin-right: 2rem;
 }
 
-.user{
+.user {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -145,19 +145,67 @@
   cursor: pointer;
 }
 
-
-.userName h1{
+.userName h1 {
   font-size: 1.2rem;
   font-weight: 600;
   color: #fff;
   width: 100%;
 }
 
-.userImage img{
+.userImage img {
   width: 2.5rem;
   height: 100%;
   color: #fff;
 }
 
+@media screen and (max-width: 500px) {
+  .upperNavigator {
+    height: 4rem;
+  }
 
+  .logo {
+    width: 15%;
+    height: 2rem;
+    margin-left: 0rem;
+  }
 
+  .logoImage {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    margin-right: 0.2rem;
+  }
+
+  .siteName {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0;
+  }
+
+  .searchBarContainer {
+    display: none;
+  }
+
+  .right {
+    width: 20%;
+    margin-right: 0;
+    padding-right: 8px;
+  }
+
+  .user {
+    width: 100%;
+    height: 2.5rem;
+    gap: 0.2rem;
+  }
+
+  .userName h1 {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+
+  .userImage img {
+    width: 1.8rem;
+    height: 100%;
+  }
+}

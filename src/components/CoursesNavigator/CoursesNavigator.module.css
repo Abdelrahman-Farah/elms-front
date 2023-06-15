@@ -52,3 +52,18 @@
     color: #333;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .navbar div,
+  .navbar a {
+    font-size: 80%;
+  }
+  .navbar li {
+    word-wrap: break-word;
+  }
+  .navbar ul {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

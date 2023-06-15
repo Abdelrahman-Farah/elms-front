@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import classes from './UpperNavigator.module.css';
-import logo from '../../Assets/logo.svg';
+import logo from '../../assets/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { searchCourse, getUserData } from '../../utils/getData';

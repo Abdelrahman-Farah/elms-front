@@ -1,4 +1,4 @@
-export const api_url = 'http://127.0.0.1:8000';
+export const api_url = 'https://elms.fly.dev';
 export const auth = 'JWT ' + localStorage.getItem('access_token');
 
 export function checkIfOwner(classroom_id) {
@@ -227,17 +227,20 @@ export function getQuizzes(classroom_id) {
 }
 
 export function deleteQuiz(classroom_id, quiz_model_id) {
-  return fetch(api_url + `/dashboard/course/${classroom_id}/quiz-model/${quiz_model_id}`, {
-    method: "DELETE",
-    headers: {
-      'content-type': 'application/json; charset=UTF-8',
-      Authorization: auth,
-    },
-  }).then(response => {
+  return fetch(
+    api_url + `/dashboard/course/${classroom_id}/quiz-model/${quiz_model_id}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json; charset=UTF-8',
+        Authorization: auth,
+      },
+    }
+  ).then(response => {
     return response.status;
   });
 }
-    
+
 export function searchCourse(searchValue) {
   return fetch(api_url + `/dashboard/course/${'?search=' + searchValue}`, {
     method: 'GET',
@@ -287,7 +290,10 @@ export function updateUserData(firstName, lastName, profilePicture) {
   formData.append('last_name', lastName);
   if (profilePicture instanceof File) {
     formData.append('profile_picture', profilePicture);
-  } else if (typeof profilePicture === 'string' && profilePicture.startsWith('http')) {
+  } else if (
+    typeof profilePicture === 'string' &&
+    profilePicture.startsWith('http')
+  ) {
     // Fetch the file from the URL and append it to the FormData
     fetch(profilePicture)
       .then(response => response.blob())
@@ -319,7 +325,6 @@ export function updateUserData(firstName, lastName, profilePicture) {
     });
 }
 
-
 export function getCourseLearners(courseId) {
   return fetch(api_url + `/dashboard/course/${courseId}/learners/`, {
     method: 'GET',
@@ -342,12 +347,39 @@ export function getCourseLearners(courseId) {
 }
 
 export function deleteLearner(courseId, learnerId) {
-  return fetch(api_url + `/dashboard/course/${courseId}/learners/${learnerId}/`, {
-    method: 'DELETE',
+  return fetch(
+    api_url + `/dashboard/course/${courseId}/learners/${learnerId}/`,
+    {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json; charset=UTF-8',
+        Authorization: auth,
+      },
+    }
+  ).then(response => {
+    return response;
+  });
+}
+
+export function sendMeetingLink(
+  courseId,
+  description,
+  startTime,
+  endTime
+) {
+  const data = {
+    summary: 'meetingLink',
+    description: description,
+    start_time: startTime,
+    end_time: endTime,
+  };
+  return fetch(api_url + `/dashboard/course/${courseId}/events/`, {
+    method: 'POST',
     headers: {
       'content-type': 'application/json; charset=UTF-8',
       Authorization: auth,
     },
+    body: JSON.stringify(data),
   }).then(response => {
     return response;
   });

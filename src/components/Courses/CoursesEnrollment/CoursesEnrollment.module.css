@@ -101,3 +101,12 @@
   color: #292929;
   cursor: not-allowed;
 }
+
+@media (max-width: 500px) {
+  .joinCodeInstructions {
+    width: 90%;
+  }
+  .container {
+    width: 90%;
+  }
+}
