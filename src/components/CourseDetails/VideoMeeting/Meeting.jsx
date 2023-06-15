@@ -5,9 +5,9 @@ import { faVideo, faKeyboard } from '@fortawesome/free-solid-svg-icons';
 import meetPeople from '../../../assets/meetPeople.jpg';
 import useInput from '../../../hooks/useInput';
 import { Link, useParams } from 'react-router-dom';
-import { checkIfOwner } from '../../../utils/getData';
+import { checkIfOwner, sendMeetingLink } from '../../../utils/getData';
 
-const isNotEmpty = value => value.trim() !== '' && value.length === 8;
+const isNotEmpty = value => value.trim() !== '' && value.length === 4;
 const linkIsNotEmpty = value => value.trim() !== '';
 
 const Meeting = () => {
@@ -15,7 +15,6 @@ const Meeting = () => {
   const [isOwner, setIsOwner] = useState(false);
   const startDateTimeRef = useRef(null);
   const endDateTimeRef = useRef(null);
-
 
   const {
     value: enteredMeetingLink,
@@ -41,7 +40,7 @@ const Meeting = () => {
       return;
     }
     window.open(
-      `${window.location.origin}/room/?roomID=${enteredMeetingCode}`,
+      `https://mazen-barakat.github.io/video/WEB_UIKITS.html?roomID=${enteredMeetingCode}`,
       '_blank'
     );
     meetingCodeReset();
@@ -55,8 +54,18 @@ const Meeting = () => {
     const startDateTime = startDateTimeRef.current.value;
     const endDateTime = endDateTimeRef.current.value;
 
-    console.log(startDateTime);
-    console.log(endDateTime); 
+    try {
+      const result = await sendMeetingLink(
+        courseId,
+        enteredMeetingLink,
+        startDateTime,
+        endDateTime
+      ).then(response => {
+        console.log(response);
+      });
+    } catch (error) {
+      console.error(error);
+    }
 
     meetingLinkReset();
   };
@@ -68,7 +77,6 @@ const Meeting = () => {
     };
     checkIfOwnerHandler();
   }, [courseId]);
-
 
   const getCurrentDateTime = () => {
     const now = new Date();
@@ -95,7 +103,10 @@ const Meeting = () => {
 
         <div className={classes.meetingCreateOrJoin}>
           <div style={{ padding: 0 }}>
-            <Link to='/room' target='_blank'>
+            <Link
+              to='https://mazen-barakat.github.io/video/WEB_UIKITS.html'
+              target='_blank'
+            >
               <button className={classes.meetingCreate}>
                 <FontAwesomeIcon
                   className={classes.materialIcons}

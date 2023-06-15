@@ -208,3 +208,76 @@
 .hide:hover {
   color: #5c5a5a;
 }
+
+@media screen and (max-width: 768px) {
+  .postContainer {
+    width: 100%;
+  }
+  .posts {
+    width: 100%;
+  }
+  .topDetail {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .title h1 {
+    font-size: 1.5rem;
+  }
+  .downDetail {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .middle {
+    width: 100%;
+  }
+  .description {
+    width: 100%;
+  }
+  .description p {
+    width: 100%;
+  }
+  .imagesContainer,
+  .videosContainer,
+  .filesContainer {
+    width: 100%;
+  }
+  .imageBox img {
+    width: 100%;
+    height: 100%;
+  }
+  .imageBox a,
+  .videoBox a,
+  .fileBox a {
+    width: 100%;
+    height: 100%;
+  }
+  .imageBox div,
+  .videoBox div,
+  .fileBox div {
+    width: 100%;
+  }
+  .imageBox div h6,
+  .videoBox div h6,
+  .fileBox div h6 {
+    font-size: 12px;
+  }
+  .imageBox div p,
+  .videoBox div p,
+  .fileBox div p {
+    font-size: 14px;
+  }
+  .imageBox svg,
+  .videoBox svg,
+  .fileBox svg {
+    font-size: 30px;
+  }
+  .hide {
+    padding-bottom: 0;
+  }
+  .hide h5 {
+    font-size: 14px;
+  }
+  .hide svg {
+    font-size: 20px;
+  }
+}

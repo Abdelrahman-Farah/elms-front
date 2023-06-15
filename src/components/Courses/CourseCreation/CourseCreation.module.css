@@ -18,7 +18,7 @@
 .control {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .control label {
@@ -44,7 +44,7 @@
 .control .error {
   color: red;
   font-size: 14px;
-  margin-top: 5px;
+  margin-bottom: 0;
 }
 
 .avatar {

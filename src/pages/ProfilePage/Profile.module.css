@@ -23,14 +23,11 @@
   flex: 1;
 }
 
-
-
 .username h1 {
   font-size: 2rem;
   font-weight: bold;
   margin: 0;
 }
-
 
 .btn {
   font-size: 1.2rem;
@@ -57,8 +54,6 @@
 .cancelButton {
   background-color: #dc3545;
 }
-
-
 
 .downDetail {
   display: flex;
@@ -125,7 +120,7 @@
   gap: 20px;
 }
 
-.email{
+.email {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -135,23 +130,23 @@
   border-bottom: 1px solid #1a1212;
 }
 
-.email h3{
+.email h3 {
   margin: 0;
   width: 40%;
 }
 
-.email p{
+.email p {
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   color: #888888;
   font-weight: normal;
-  font-size: 1.4rem; 
+  font-size: 1.4rem;
   width: 60%;
 }
 
-.firstName{
+.firstName {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -161,7 +156,7 @@
   border-bottom: 1px solid #1a1212;
 }
 
-.firstName h3{
+.firstName h3 {
   margin: 0;
   width: 40%;
 }
@@ -174,7 +169,7 @@
   justify-content: flex-start;
   color: #888888;
   font-weight: normal;
-  font-size: 1.4rem; 
+  font-size: 1.4rem;
   width: 60%;
 }
 
@@ -183,8 +178,7 @@
   outline: none;
 }
 
-
-.lastName{
+.lastName {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -193,7 +187,7 @@
   width: 100%;
 }
 
-.lastName h3{
+.lastName h3 {
   margin: 0;
   width: 40%;
 }
@@ -206,11 +200,112 @@
   justify-content: flex-start;
   color: #888888;
   font-weight: normal;
-  font-size: 1.4rem; 
+  font-size: 1.4rem;
   width: 60%;
 }
 
 .lastName input {
   border: none;
   outline: none;
+}
+
+@media screen and (max-width: 500px) {
+  .Container {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .topDetail {
+    flex-direction: row;
+  }
+
+  .username {
+    margin-bottom: 10px;
+  }
+
+  .editActions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .left {
+    display: flex;
+    align-items: center;
+    margin-right: 0;
+    justify-content: center;
+  }
+
+  .middle {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .downDetail {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .cancelButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .profilePicture {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .profilePictureButton {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .email {
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .email h3 {
+    width: 25%;
+    font-size: 1.3rem;
+  }
+  .email p {
+    width: 75%;
+    font-size: 1.3rem;
+  }
+
+  .firstName {
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .firstName h3 {
+    width: 25%;
+    font-size: 1.3rem;
+  }
+  .firstName p,
+  .firstName input {
+    width: 75%;
+    font-size: 1.3rem;
+  }
+
+  .lastName {
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .lastName h3 {
+    width: 25%;
+    font-size: 1.3rem;
+  }
+  .lastName p,
+  .lastName input {
+    width: 75%;
+    font-size: 1.3rem;
+  }
+  
 }

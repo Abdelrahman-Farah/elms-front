@@ -152,7 +152,7 @@ const CoursesCreation = () => {
             disabled={!formIsValid}
             type='submit'
           >
-            Submit
+            Create Course
           </button>
         </div>
       </form>
