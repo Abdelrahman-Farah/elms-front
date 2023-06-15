@@ -7,7 +7,7 @@ import useInput from '../../../hooks/useInput';
 import { Link, useParams } from 'react-router-dom';
 import { checkIfOwner, sendMeetingLink } from '../../../utils/getData';
 
-const isNotEmpty = value => value.trim() !== '' && value.length === 8;
+const isNotEmpty = value => value.trim() !== '' && value.length === 4;
 const linkIsNotEmpty = value => value.trim() !== '';
 
 const Meeting = () => {
@@ -40,7 +40,7 @@ const Meeting = () => {
       return;
     }
     window.open(
-      `${window.location.origin}/room/?roomID=${enteredMeetingCode}`,
+      `https://mazen-barakat.github.io/video/WEB_UIKITS.html?roomID=${enteredMeetingCode}`,
       '_blank'
     );
     meetingCodeReset();
@@ -103,7 +103,10 @@ const Meeting = () => {
 
         <div className={classes.meetingCreateOrJoin}>
           <div style={{ padding: 0 }}>
-            <Link to='/room' target='_blank'>
+            <Link
+              to='https://mazen-barakat.github.io/video/WEB_UIKITS.html'
+              target='_blank'
+            >
               <button className={classes.meetingCreate}>
                 <FontAwesomeIcon
                   className={classes.materialIcons}
