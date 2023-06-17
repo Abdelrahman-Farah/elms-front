@@ -1,5 +1,5 @@
-export const api_url = "http://127.0.0.1:8000";
-export const auth = "JWT " + localStorage.getItem("access_token");
+export const api_url = 'https://elms.fly.dev';
+export const auth = 'JWT ' + localStorage.getItem('access_token');
 
 export function checkIfOwner(classroom_id) {
   return fetch(api_url + `/dashboard/course/${classroom_id}/is-owner/`, {
@@ -232,13 +232,13 @@ export function deleteQuiz(classroom_id, quiz_model_id) {
   return fetch(
     api_url + `/dashboard/course/${classroom_id}/quiz-model/${quiz_model_id}`,
     {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "content-type": "application/json; charset=UTF-8",
+        'content-type': 'application/json; charset=UTF-8',
         Authorization: auth,
       },
     }
-  ).then((response) => {
+  ).then(response => {
     return response.status;
   });
 }
@@ -291,10 +291,10 @@ export function updateUserData(firstName, lastName, profilePicture) {
   formData.append("first_name", firstName);
   formData.append("last_name", lastName);
   if (profilePicture instanceof File) {
-    formData.append("profile_picture", profilePicture);
+    formData.append('profile_picture', profilePicture);
   } else if (
-    typeof profilePicture === "string" &&
-    profilePicture.startsWith("http")
+    typeof profilePicture === 'string' &&
+    profilePicture.startsWith('http')
   ) {
     // Fetch the file from the URL and append it to the FormData
     fetch(profilePicture)
@@ -383,6 +383,150 @@ export function sendMeetingLink(
     },
     body: JSON.stringify(data),
   }).then(response => {
+    return response;
+  });
+}
+
+export function createCourseAssignment(
+  courseId,
+  title,
+  description,
+  dueDate,
+  degree,
+  file
+) { 
+  let error = false;
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('description', description);
+  formData.append('due_date', dueDate);
+  formData.append('degree', degree);
+  if (file) {
+    formData.append('file', file);
+  }
+  return fetch(api_url + `/dashboard/course/${courseId}/assignments/`, {
+    method: 'POST',
+    headers: {
+      Authorization: auth,
+    },
+    body: formData,
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        error = true;
+        return response.json();
+      }
+    })
+    .then(response => {
+      return { response, error };
+    });
+}
+
+export function getCourseAssignments(courseId) {
+  return fetch(api_url + `/dashboard/course/${courseId}/assignments/`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+      Authorization: auth,
+    },
+    body: JSON.stringify(data),
+  }).then(response => {
+    if (response.status === 200) {
+      return response.json().then(data => {
+        return {
+          result: data,
+          status: response.status,
+        };
+      });
+    } else {
+      return response.status;
+    }
+  });
+}
+
+export function getAssignmentSubmissions(courseId,assignmentId) {
+  return fetch(
+    api_url +
+      `/dashboard/course/${courseId}/assignments/${assignmentId}/submissions/`,
+    {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json; charset=UTF-8',
+        Authorization: auth,
+      },
+    }
+  ).then(response => {
+    if (response.status === 200) {
+      return response.json().then(data => {
+        return {
+          result: data,
+          status: response.status,
+        };
+      });
+    } else {
+      return response.status;
+    }
+  });
+}
+
+export function createAssignmentSubmission(
+  courseId,
+  assignmentId,
+  submissionId,
+  file
+) {
+  let error = false;
+  console.log(submissionId);
+  const formData = new FormData();
+  formData.append('status', true);
+  formData.append('file', file);
+  return fetch(
+    api_url +
+      `/dashboard/course/${courseId}/assignments/${assignmentId}/submissions/${submissionId}/`,
+    {
+      method: 'PUT',
+      headers: {
+        Authorization: auth,
+      },
+      body: formData,
+    }
+  )
+    .then(response => { console.log(response);
+      if (response.ok) {
+        return response.json();
+      } else {
+        error = true;
+        return response.json();
+      }
+    })
+    .then(response => {
+      return { response, error };
+    });
+}
+
+export function updateAssignmentScore(
+  courseId,
+  assignmentId,
+  submissionId,
+  score
+) {
+  const data = {
+    score: score,
+  };
+  return fetch(
+    api_url +
+      `/dashboard/course/${courseId}/assignments/${assignmentId}/submissions/${submissionId}/`,
+    {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json; charset=UTF-8',
+        Authorization: auth,
+      },
+      body: JSON.stringify(data),
+    }
+  ).then(response => {
     return response;
   });
 }

@@ -100,7 +100,7 @@ const CoursesNavigator = props => {
           </li>
           <li>
             <NavLink
-              to='/'
+              to='assignment'
               className={({ isActive }) => (isActive ? classes.active : null)}
             >
               Assignments
