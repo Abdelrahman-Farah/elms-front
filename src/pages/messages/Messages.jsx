@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Messages.module.css";
 import classes from "./Messages.module.css";
-import socketio from "socket.io-client";
 import useWebSocket from "react-use-websocket";
 import {
   getUserData,
@@ -11,7 +10,6 @@ import {
   createChat,
   searchContacts,
 } from "../../utils/getData";
-import { set } from "react-hook-form";
 
 export default function Messages() {
   const [userData, setUserData] = useState({});
@@ -127,25 +125,7 @@ export default function Messages() {
       }
     },
   });
-
-  // const po = socketio("http://127.0.0.1:9500/ws/chat/lobby/");
-  // console.log(po);
-  // socket connection to http://127.0.0.1:9500/ws/chat/lobby/
-  //   const [socket, setSocket] = useState(null);
-  //   const [messages, setMessages] = useState([]);
-  //   useEffect(() => {
-  //     const chatSocket = new WebSocket(
-  //       "ws://" + "127.0.0.1:9500" + "/ws/chat/lobby/"
-  //     );
-  //     chatSocket.onmessage = (event) => {
-  //       const data = JSON.parse(event.data);
-  //       setMessages((prevMessages) => [...prevMessages, data]);
-  //     };
-  //     setSocket(chatSocket);
-  //   }, []);
-
   const submitMessage = (event) => {
-    // console.log("sending message");
     event.preventDefault();
     if (message.trim().length == 0) {
       return;
@@ -157,19 +137,8 @@ export default function Messages() {
     };
     sendJsonMessage(messageObject);
     lastRef.current.scrollIntoView();
-    // sendJsonMessage({ command: "fetch_messages", from: userData.username });
-
-    // sendJsonMessage({ command: "fetch_messages", from: userData.username });
     setMessage("");
   };
-  //   const fetchMessages = (event) => {
-  //     console.log("fetching messages");
-  //     const messageObject = {
-  //       command: "fetch_messages",
-  //     };
-  //     socket.send(JSON.stringify(messageObject));
-  //     setMessage("");
-  //   };
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -378,7 +347,6 @@ export default function Messages() {
                           <img src={userData.profile_picture} alt="" />
                           <p>{message.content}</p>
                         </li>
-
                       </>
                     );
                   } else {
@@ -397,16 +365,15 @@ export default function Messages() {
                           />
                           <p>{message.content}</p>
                         </li>
-
                       </>
                     );
                   }
                 })}
-                                        {messages.length >0 && (
-                          <li ref={lastRef} id="dummy" class={classes.replies}>
-                            <p></p>
-                          </li>
-                        )}
+              {messages.length > 0 && (
+                <li ref={lastRef} id="dummy" class={classes.replies}>
+                  <p></p>
+                </li>
+              )}
             </ul>
           </div>
           <div class={classes["message-input"]}>
