@@ -1,13 +1,13 @@
-export const api_url = 'http://127.0.0.1:8000';
-export const auth = 'JWT ' + localStorage.getItem('access_token');
+export const api_url = "http://127.0.0.1:8000";
+export const auth = "JWT " + localStorage.getItem("access_token");
 
 export function checkIfOwner(classroom_id) {
   return fetch(api_url + `/dashboard/course/${classroom_id}/is-owner/`, {
     headers: {
-      'content-type': 'application/json; charset=UTF-8',
+      "content-type": "application/json; charset=UTF-8",
       Authorization: auth,
     },
-  }).then(response => {
+  }).then((response) => {
     if (response.status === 200) return 1; // user is the owner
     else if (response.status === 403) return 0; // user isn't owner
     else if (response.status === 401) return -1; // user isn't logged in
@@ -15,15 +15,17 @@ export function checkIfOwner(classroom_id) {
   });
 }
 
+
+
 export function getCourses() {
-  return fetch(api_url + '/dashboard/course/', {
+  return fetch(api_url + "/dashboard/course/", {
     headers: {
-      'content-type': 'application/json; charset=UTF-8',
+      "content-type": "application/json; charset=UTF-8",
       Authorization: auth,
     },
-  }).then(response => {
+  }).then((response) => {
     if (response.status === 200) {
-      return response.json().then(data => {
+      return response.json().then((data) => {
         return {
           result: data,
           status: response.status,
@@ -38,12 +40,12 @@ export function getCourses() {
 export function getSelectedCourses(id) {
   return fetch(api_url + `/dashboard/course/${id}/`, {
     headers: {
-      'content-type': 'application/json; charset=UTF-8',
+      "content-type": "application/json; charset=UTF-8",
       Authorization: auth,
     },
-  }).then(response => {
+  }).then((response) => {
     if (response.status === 200) {
-      return response.json().then(data => {
+      return response.json().then((data) => {
         return {
           result: data,
           status: response.status,
@@ -57,17 +59,17 @@ export function getSelectedCourses(id) {
 
 export function enrollCourse(JoinCode) {
   let error = false;
-  return fetch(api_url + '/dashboard/enrollments/', {
-    method: 'POST',
+  return fetch(api_url + "/dashboard/enrollments/", {
+    method: "POST",
     headers: {
-      'content-type': 'application/json; charset=UTF-8',
+      "content-type": "application/json; charset=UTF-8",
       Authorization: auth,
     },
     body: JSON.stringify({
       join_code: JoinCode,
     }),
   })
-    .then(response => {
+    .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
@@ -75,7 +77,7 @@ export function enrollCourse(JoinCode) {
         return response.json();
       }
     })
-    .then(response => {
+    .then((response) => {
       return { response, error };
     });
 }
@@ -83,19 +85,19 @@ export function enrollCourse(JoinCode) {
 export function createCourse(title, description, avatar) {
   let error = false;
   const formData = new FormData();
-  formData.append('title', title);
-  formData.append('description', description);
+  formData.append("title", title);
+  formData.append("description", description);
   if (avatar) {
-    formData.append('avatar', avatar);
+    formData.append("avatar", avatar);
   }
-  return fetch(api_url + '/dashboard/course/', {
-    method: 'POST',
+  return fetch(api_url + "/dashboard/course/", {
+    method: "POST",
     headers: {
       Authorization: auth,
     },
     body: formData,
   })
-    .then(response => {
+    .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
@@ -103,7 +105,7 @@ export function createCourse(title, description, avatar) {
         return response.json();
       }
     })
-    .then(response => {
+    .then((response) => {
       return { response, error };
     });
 }
@@ -111,30 +113,30 @@ export function createCourse(title, description, avatar) {
 export function updateCourse(courseId, title, description, avatar) {
   let error = false;
   const formData = new FormData();
-  formData.append('title', title);
-  formData.append('description', description);
+  formData.append("title", title);
+  formData.append("description", description);
   if (avatar instanceof File) {
-    formData.append('avatar', avatar);
-  } else if (typeof avatar === 'string' && avatar.startsWith('http')) {
+    formData.append("avatar", avatar);
+  } else if (typeof avatar === "string" && avatar.startsWith("http")) {
     // Fetch the file from the URL and append it to the FormData
     fetch(avatar)
-      .then(response => response.blob())
-      .then(blob => {
-        const file = new File([blob], 'avatar.jpg', { type: 'image/jpeg' });
-        formData.append('avatar', file);
+      .then((response) => response.blob())
+      .then((blob) => {
+        const file = new File([blob], "avatar.jpg", { type: "image/jpeg" });
+        formData.append("avatar", file);
       })
-      .catch(error => {
-        console.error('Error fetching avatar:', error);
+      .catch((error) => {
+        console.error("Error fetching avatar:", error);
       });
   }
   return fetch(api_url + `/dashboard/course/${courseId}/`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
       Authorization: auth,
     },
     body: formData,
   })
-    .then(response => {
+    .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
@@ -142,19 +144,19 @@ export function updateCourse(courseId, title, description, avatar) {
         return response.json();
       }
     })
-    .then(response => {
+    .then((response) => {
       return { response, error };
     });
 }
 
 export function deleteCourse(courseId) {
   return fetch(api_url + `/dashboard/course/${courseId}/`, {
-    method: 'DELETE',
+    method: "DELETE",
     headers: {
-      'content-type': 'application/json; charset=UTF-8',
+      "content-type": "application/json; charset=UTF-8",
       Authorization: auth,
     },
-  }).then(response => {
+  }).then((response) => {
     return response;
   });
 }
@@ -162,12 +164,12 @@ export function deleteCourse(courseId) {
 export function getPosts(courseId) {
   return fetch(api_url + `/dashboard/course/${courseId}/post/`, {
     headers: {
-      'content-type': 'application/json; charset=UTF-8',
+      "content-type": "application/json; charset=UTF-8",
       Authorization: auth,
     },
-  }).then(response => {
+  }).then((response) => {
     if (response.status === 200) {
-      return response.json().then(data => {
+      return response.json().then((data) => {
         return {
           result: data,
           status: response.status,
@@ -182,21 +184,21 @@ export function getPosts(courseId) {
 export function createPost(courseId, title, description, files) {
   let error = false;
   const formData = new FormData();
-  formData.append('title', title);
-  formData.append('description', description);
+  formData.append("title", title);
+  formData.append("description", description);
   if (files) {
     for (let i = 0; i < files.length; i++) {
-      formData.append('files', files[i]);
+      formData.append("files", files[i]);
     }
   }
   return fetch(api_url + `/dashboard/course/${courseId}/post/`, {
-    method: 'POST',
+    method: "POST",
     headers: {
       Authorization: auth,
     },
     body: formData,
   })
-    .then(response => {
+    .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
@@ -204,20 +206,20 @@ export function createPost(courseId, title, description, files) {
         return response.json();
       }
     })
-    .then(response => {
+    .then((response) => {
       return { response, error };
     });
 }
 
 export function getQuizzes(classroom_id) {
   return fetch(api_url + `/dashboard/course/${classroom_id}/quiz-model/`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'content-type': 'application/json; charset=UTF-8',
+      "content-type": "application/json; charset=UTF-8",
       Authorization: auth,
     },
-  }).then(response => {
-    return response.json().then(data => {
+  }).then((response) => {
+    return response.json().then((data) => {
       return {
         result: data,
         status: response.status,
@@ -227,27 +229,30 @@ export function getQuizzes(classroom_id) {
 }
 
 export function deleteQuiz(classroom_id, quiz_model_id) {
-  return fetch(api_url + `/dashboard/course/${classroom_id}/quiz-model/${quiz_model_id}`, {
-    method: "DELETE",
-    headers: {
-      'content-type': 'application/json; charset=UTF-8',
-      Authorization: auth,
-    },
-  }).then(response => {
+  return fetch(
+    api_url + `/dashboard/course/${classroom_id}/quiz-model/${quiz_model_id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json; charset=UTF-8",
+        Authorization: auth,
+      },
+    }
+  ).then((response) => {
     return response.status;
   });
 }
-    
+
 export function searchCourse(searchValue) {
-  return fetch(api_url + `/dashboard/course/${'?search=' + searchValue}`, {
-    method: 'GET',
+  return fetch(api_url + `/dashboard/course/${"?search=" + searchValue}`, {
+    method: "GET",
     headers: {
-      'content-type': 'application/json; charset=UTF-8',
+      "content-type": "application/json; charset=UTF-8",
       Authorization: auth,
     },
-  }).then(response => {
+  }).then((response) => {
     if (response.status === 200) {
-      return response.json().then(data => {
+      return response.json().then((data) => {
         return {
           result: data,
           status: response.status,
@@ -260,15 +265,15 @@ export function searchCourse(searchValue) {
 }
 
 export function getUserData() {
-  return fetch(api_url + '/auth/users/me/', {
-    method: 'GET',
+  return fetch(api_url + "/auth/users/me/", {
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: auth,
     },
-  }).then(result => {
+  }).then((result) => {
     if (result.status === 200) {
-      return result.json().then(data => {
+      return result.json().then((data) => {
         return {
           result: data,
           status: result.status,
@@ -283,30 +288,33 @@ export function getUserData() {
 export function updateUserData(firstName, lastName, profilePicture) {
   let error = false;
   const formData = new FormData();
-  formData.append('first_name', firstName);
-  formData.append('last_name', lastName);
+  formData.append("first_name", firstName);
+  formData.append("last_name", lastName);
   if (profilePicture instanceof File) {
-    formData.append('profile_picture', profilePicture);
-  } else if (typeof profilePicture === 'string' && profilePicture.startsWith('http')) {
+    formData.append("profile_picture", profilePicture);
+  } else if (
+    typeof profilePicture === "string" &&
+    profilePicture.startsWith("http")
+  ) {
     // Fetch the file from the URL and append it to the FormData
     fetch(profilePicture)
-      .then(response => response.blob())
-      .then(blob => {
-        const file = new File([blob], 'avatar.jpg', { type: 'image/jpeg' });
-        formData.append('profile_picture', file);
+      .then((response) => response.blob())
+      .then((blob) => {
+        const file = new File([blob], "avatar.jpg", { type: "image/jpeg" });
+        formData.append("profile_picture", file);
       })
-      .catch(error => {
-        console.error('Error fetching avatar:', error);
+      .catch((error) => {
+        console.error("Error fetching avatar:", error);
       });
   }
-  return fetch(api_url + '/auth/users/me/', {
-    method: 'PUT',
+  return fetch(api_url + "/auth/users/me/", {
+    method: "PUT",
     headers: {
       Authorization: auth,
     },
     body: formData,
   })
-    .then(response => {
+    .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
@@ -314,22 +322,21 @@ export function updateUserData(firstName, lastName, profilePicture) {
         return response.json();
       }
     })
-    .then(response => {
+    .then((response) => {
       return { response, error };
     });
 }
 
-
 export function getCourseLearners(courseId) {
   return fetch(api_url + `/dashboard/course/${courseId}/learners/`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'content-type': 'application/json; charset=UTF-8',
+      "content-type": "application/json; charset=UTF-8",
       Authorization: auth,
     },
-  }).then(response => {
+  }).then((response) => {
     if (response.status === 200) {
-      return response.json().then(data => {
+      return response.json().then((data) => {
         return {
           result: data,
           status: response.status,
@@ -342,13 +349,123 @@ export function getCourseLearners(courseId) {
 }
 
 export function deleteLearner(courseId, learnerId) {
-  return fetch(api_url + `/dashboard/course/${courseId}/learners/${learnerId}/`, {
-    method: 'DELETE',
+  return fetch(
+    api_url + `/dashboard/course/${courseId}/learners/${learnerId}/`,
+    {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json; charset=UTF-8",
+        Authorization: auth,
+      },
+    }
+  ).then((response) => {
+    return response;
+  });
+}
+
+export function getChatContacts() {
+  return fetch(api_url + `/chat/chat/`, {
+    method: "GET",
     headers: {
-      'content-type': 'application/json; charset=UTF-8',
+      "content-type": "application/json; charset=UTF-8",
       Authorization: auth,
     },
-  }).then(response => {
-    return response;
+  }).then((response) => {
+    if (response.status === 200) {
+      return response.json().then((data) => {
+        return {
+          result: data,
+          status: response.status,
+        };
+      });
+    } else {
+      return response.status;
+    }
+  });
+}
+
+export function getContactDetail(participantID) {
+  return fetch(api_url + `/chat/contact/` + participantID + "/", {
+    method: "GET",
+    headers: {
+      "content-type": "application/json; charset=UTF-8",
+      Authorization: auth,
+    },
+  }).then((response) => {
+    if (response.status === 200) {
+      return response.json().then((data) => {
+        return {
+          result: data,
+          status: response.status,
+        };
+      });
+    } else {
+      return response.status;
+    }
+  });
+}
+
+export function getAllContacts() {
+  return fetch(api_url + `/chat/contact/`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json; charset=UTF-8",
+      Authorization: auth,
+    },
+  }).then((response) => {
+    if (response.status === 200) {
+      return response.json().then((data) => {
+        return {
+          result: data,
+          status: response.status,
+        };
+      });
+    } else {
+      return response.status;
+    }
+  });
+}
+
+export function createChat(participant_id) {
+  return fetch(api_url + `/chat/chat/`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json; charset=UTF-8",
+      Authorization: auth,
+    },
+    body: JSON.stringify({
+      participants: [participant_id],
+    }),
+  }).then((response) => {
+    if (response.status === 200) {
+      return response.json().then((data) => {
+        return {
+          result: data,
+          status: response.status,
+        };
+      });
+    } else {
+      return response.status;
+    }
+  });
+}
+export function searchContacts(name){
+  return fetch(api_url + `/chat/contact/?search=${name}`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json; charset=UTF-8",
+      Authorization: auth,
+    },
+  }).then((response) => {
+    if (response.status === 200) {
+      return response.json().then((data) => {
+        return {
+          result: data,
+          status: response.status,
+        };
+      });
+    } else {
+      return response.status;
+    }
   });
 }
