@@ -87,7 +87,7 @@ export default function Messages() {
   };
 
   useEffect(() => {
-    if (lastRef.current) {
+    if (lastRef.current && messages.length != 0 && !loading) {
       lastRef.current.scrollIntoView();
     }
   }, [messages]);
@@ -95,6 +95,7 @@ export default function Messages() {
     console.log("useEffect");
     fetchUserData();
   }, []);
+
   useEffect(() => {
     if (mode == "contacts") {
       getContacts();
@@ -146,8 +147,8 @@ export default function Messages() {
   const submitMessage = (event) => {
     // console.log("sending message");
     event.preventDefault();
-    if(message.trim().length == 0){
-        return
+    if (message.trim().length == 0) {
+      return;
     }
     const messageObject = {
       command: "new_message",
@@ -175,6 +176,34 @@ export default function Messages() {
   console.log(userData);
   return (
     <div>
+      <link
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300"
+        rel="stylesheet"
+        type="text/css"
+      />
+      <script src="https://use.typekit.net/hoy3lrg.js"></script>
+      <link
+        rel="stylesheet prefetch"
+        href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+      />
+      <link
+        rel="stylesheet prefetch"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css"
+      />
+      <link
+        href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        rel="stylesheet"
+        id="bootstrap-css"
+      />
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <link
+        href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+        rel="stylesheet"
+        id="bootstrap-css"
+      />
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+      <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
       <div id={classes.frame}>
         <div id={classes.sidepanel}>
           <div id={classes.profile}>
@@ -307,10 +336,6 @@ export default function Messages() {
               <i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>
               <span>{mode === "contacts" ? "Add" : "View"} contact</span>
             </button>
-            <button id={classes.settings}>
-              <i class="fa fa-cog fa-fw" aria-hidden="true"></i>
-              <span>Settings</span>
-            </button>
           </div>
         </div>
         <div class={classes.content}>
@@ -348,32 +373,40 @@ export default function Messages() {
                 messages.map((message, index) => {
                   if (message.author == userData.username) {
                     return (
-                      <li class={classes.sent}>
-                        <img src={userData.profile_picture} alt="" />
-                        <p>{message.content}</p>
-                      </li>
+                      <>
+                        <li class={classes.sent}>
+                          <img src={userData.profile_picture} alt="" />
+                          <p>{message.content}</p>
+                        </li>
+
+                      </>
                     );
                   } else {
                     return (
-                      <li class={classes.replies}>
-                        <img
-                          src={
-                            tempContacts
-                              .find((contact) => contact.id == chatID)
-                              ?.participants.find(
-                                (participant) => participant.id != userData.id
-                              ).profile_pic
-                          }
-                          alt=""
-                        />
-                        <p>{message.content}</p>
-                      </li>
+                      <>
+                        <li class={classes.replies}>
+                          <img
+                            src={
+                              tempContacts
+                                .find((contact) => contact.id == chatID)
+                                ?.participants.find(
+                                  (participant) => participant.id != userData.id
+                                ).profile_pic
+                            }
+                            alt=""
+                          />
+                          <p>{message.content}</p>
+                        </li>
+
+                      </>
                     );
                   }
                 })}
-              <li ref={lastRef} id="dummy" class={classes.replies}>
-                <p></p>
-              </li>
+                                        {messages.length >0 && (
+                          <li ref={lastRef} id="dummy" class={classes.replies}>
+                            <p></p>
+                          </li>
+                        )}
             </ul>
           </div>
           <div class={classes["message-input"]}>
