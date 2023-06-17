@@ -1,0 +1,257 @@
+.assignment {
+  width: 90%;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.assignmentItem {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 3rem;
+}
+
+.rightInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.assignmentItemHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+}
+
+.assignmentItemHeader svg {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.assignmentItemHeader h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: 0.1rem;
+}
+
+.assignmentItemBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.assignmentItemBodyHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.assignmentItemBodyHeader h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.assignmentItemBodyHeader p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.assignmentItemFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.assignmentItemButton {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  border: 1px solid #007bff;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+  margin-right: 1rem;
+}
+
+.assignmentItemButton:hover,
+.assignmentItemButton:active {
+  background-color: #086dd9;
+  border-color: #086dd9;
+}
+
+.courseSubmission {
+  width: 60%;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: flex-start;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.fileUpload {
+  width: 58%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.fileUpload input {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  max-width: 80%;
+}
+
+.fileUpload input:hover {
+  cursor: pointer;
+  box-shadow: 0 0 5px #66afe9;
+  border-color: #66afe9;
+}
+
+.fileUpload label {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.assignmentItemButton{
+  margin-top: auto;
+  font: inherit;
+  cursor: pointer;
+  padding: 0.7rem 2rem;
+  border: 1px solid #007bff;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+}
+
+.assignmentItemButton:disabled,
+.assignmentItemButton[disabled] {
+  background-color: #ccc;
+  border-color: #ccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.hide {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding-bottom: 1rem;
+}
+.hide h5 {
+  margin-left: 5px;
+  margin-bottom: 0 !important;
+}
+
+.hide svg {
+  font-size: 20px;
+}
+
+.hide:hover {
+  color: #5c5a5a;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.submissions{
+  width: 95%;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.submissionsList {
+  display: table;
+  width: 100%;
+}
+
+.submissionItem {
+  display: table-row;
+}
+
+.submissionItem > * {
+  display: table-cell;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.submissionItemButton {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.3rem 1rem;
+  border: 1px solid #007bff;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+  margin-right: 0.2rem;
+}
+
+.grade{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grade label {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.gradeInput {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  max-width: 80%;
+}
+
+.gradeInput:hover {
+  cursor: pointer;
+  box-shadow: 0 0 5px #66afe9;
+  border-color: #66afe9;
+}
+
+.gradeButton {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid #007bff;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+}

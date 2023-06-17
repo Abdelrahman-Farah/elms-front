@@ -33,6 +33,7 @@ import Room from './components/CourseDetails/VideoMeeting/Room';
 import Profile from './pages/ProfilePage/Profile';
 import QuizResult from './components/quiz/QuizResult/QuizResult';
 import AllQuizResults from './components/quiz/AllQuizResults/AllQuizResults';
+import CourseAssignment from './components/CourseDetails/CourseAssignment/CourseAssignment';
 
 function App() {
   const BrowserRouter = createHashRouter([
@@ -80,6 +81,10 @@ function App() {
             {
               path: 'quiz/:quiz_model_id/all-students-results',
               element: <AllQuizResults />,
+            },
+            {
+              path: 'assignment',
+              element: <CourseAssignment />,
             },
           ],
         },
