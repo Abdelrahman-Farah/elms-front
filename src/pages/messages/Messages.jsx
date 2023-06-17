@@ -1,10 +1,106 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Messages.module.css";
 import classes from "./Messages.module.css";
-import socketio from "socket.io-client";
 import useWebSocket from "react-use-websocket";
+import {
+  getUserData,
+  getChatContacts,
+  getContactDetail,
+  getAllContacts,
+  createChat,
+  searchContacts,
+} from "../../utils/getData";
 
-function Messages() {
+export default function Messages() {
+  const [userData, setUserData] = useState({});
+  const [message, setMessage] = useState("");
+  const [contacts, setContacts] = useState([]);
+  const [tempContacts, setTempContacts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [chatID, setChatID] = useState(1);
+  const [mode, setMode] = useState("contacts");
+  const [messages, setMessages] = useState({});
+  const lastRef = useRef(null);
+  const createAndJoin = async (contact) => {
+    try {
+      const response = await createChat(contact);
+      setMode("contacts");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const fetchUserData = async () => {
+    try {
+      const response = await getUserData();
+      if (response.status === 200) {
+        const userData = response.result;
+        if (userData) {
+          setUserData(userData);
+        }
+      } else {
+        console.log("Error: ", response.status);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const getContacts = async () => {
+    try {
+      setLoading(true);
+      const response = await getChatContacts();
+      if (response.status === 200) {
+        setLoading(false);
+        const contacts = response.result;
+        if (contacts) {
+          setContacts(contacts);
+          setTempContacts(contacts);
+        }
+      } else {
+        setLoading(false);
+        console.log("Error: ", response.status);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+    }
+  };
+  const getAll = async () => {
+    try {
+      setLoading(true);
+      const response = await getAllContacts();
+      if (response.status === 200) {
+        setLoading(false);
+        const contacts = response.result;
+        if (contacts) {
+          setContacts(contacts);
+        }
+      } else {
+        setLoading(false);
+        console.log("Error: ", response.status);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (lastRef.current && messages.length != 0 && !loading) {
+      lastRef.current.scrollIntoView();
+    }
+  }, [messages]);
+  useEffect(() => {
+    console.log("useEffect");
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (mode == "contacts") {
+      getContacts();
+    } else {
+      getAll();
+    }
+  }, [mode]);
   const {
     sendMessage,
     sendJsonMessage,
@@ -12,52 +108,41 @@ function Messages() {
     lastJsonMessage,
     readyState,
     getWebSocket,
-  } = useWebSocket("ws://127.0.0.1:9500/ws/chat/lobby/", {
+  } = useWebSocket("ws://127.0.0.1:8000/ws/chat/" + chatID + "/", {
     onOpen: () => {
-      sendJsonMessage({ command: "fetch_messages", from: "admin" });
+      sendJsonMessage({ command: "fetch_messages", from: userData.username });
     },
     shouldReconnect: (closeEvent) => true,
     onMessage: (event) => {
-      console.log(JSON.parse(event.data));
+      let eventData = JSON.parse(event.data);
+      if (eventData.command == "new_message" && eventData.messages) {
+        setMessages(eventData.messages);
+      } else {
+        setMessages((prev) => {
+          console.log(prev);
+          return [...prev, eventData.message];
+        });
+      }
     },
   });
-
-  // const po = socketio("http://127.0.0.1:9500/ws/chat/lobby/");
-  // console.log(po);
-  // socket connection to http://127.0.0.1:9500/ws/chat/lobby/
-  //   const [socket, setSocket] = useState(null);
-  const [message, setMessage] = useState("");
-  //   const [messages, setMessages] = useState([]);
-  //   useEffect(() => {
-  //     const chatSocket = new WebSocket(
-  //       "ws://" + "127.0.0.1:9500" + "/ws/chat/lobby/"
-  //     );
-  //     chatSocket.onmessage = (event) => {
-  //       const data = JSON.parse(event.data);
-  //       setMessages((prevMessages) => [...prevMessages, data]);
-  //     };
-  //     setSocket(chatSocket);
-  //   }, []);
-
   const submitMessage = (event) => {
-    console.log("sending message");
     event.preventDefault();
+    if (message.trim().length == 0) {
+      return;
+    }
     const messageObject = {
       command: "new_message",
-      message: message,
-      from: "admin",
+      message: message.trim(),
+      from: userData.username,
     };
     sendJsonMessage(messageObject);
+    lastRef.current.scrollIntoView();
     setMessage("");
   };
-  //   const fetchMessages = (event) => {
-  //     console.log("fetching messages");
-  //     const messageObject = {
-  //       command: "fetch_messages",
-  //     };
-  //     socket.send(JSON.stringify(messageObject));
-  //     setMessage("");
-  //   };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  console.log(userData);
   return (
     <div>
       <link
@@ -94,11 +179,13 @@ function Messages() {
             <div class={classes.wrap}>
               <img
                 id={classes["profile-img"]}
-                src="http://emilcarlsson.se/assets/mikeross.png"
+                src={`${userData.profile_picture}`}
                 class={classes.online}
                 alt=""
               />
-              <p>Mike Ross</p>
+              <p>
+                {userData.first_name} {userData.last_name}
+              </p>
               <i
                 class="fa fa-chevron-down expand-button"
                 aria-hidden="true"
@@ -139,101 +226,173 @@ function Messages() {
               </div>
             </div>
           </div>
-          <div id={classes.search}>
-            <label for="">
-              <i class="fa fa-search" aria-hidden="true"></i>
-            </label>
-            <input type="text" placeholder="Search contacts..." />
-          </div>
+          {mode == "add" && (
+            <div id={classes.search}>
+              <label for="">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </label>
+              <input
+                onChange={async (e) => {
+                  let result = await searchContacts(e.target.value);
+                  setContacts(result.result);
+                }}
+                type="text"
+                placeholder="Search contacts..."
+              />
+            </div>
+          )}
           <div id={classes.contacts}>
             <ul>
-              <li class={classes.contact}>
-                <div class={classes.wrap}>
-                  <span
-                    class={`${classes["contact-status"]} ${classes["online"]}`}
-                  ></span>
-                  <img
-                    src="http://emilcarlsson.se/assets/louislitt.png"
-                    alt=""
-                  />
-                  <div class={classes.meta}>
-                    <p class={classes.name}>Louis Litt</p>
-                    <p class={classes.preview}>You just got LITT up, Mike.</p>
-                  </div>
-                </div>
-              </li>
-              <li class={`${classes["contact"]} ${classes["active"]}`}>
-                <div class={classes.wrap}>
-                  <span
-                    class={`${classes["contact-status"]} ${classes["busy"]}`}
-                  ></span>
-                  <img
-                    src="http://emilcarlsson.se/assets/harveyspecter.png"
-                    alt=""
-                  />
-                  <div class={classes.meta}>
-                    <p class={classes.name}>Harvey Specter</p>
-                    <p class={classes.preview}>
-                      Wrong. You take the gun, or you pull out a bigger one. Or,
-                      you call their bluff. Or, you do any one of a hundred and
-                      forty six other things.
-                    </p>
-                  </div>
-                </div>
-              </li>
+              {contacts.map((contact, index) => {
+                return (
+                  <li class={classes.contact}>
+                    <div class={classes.wrap}>
+                      <span
+                        class={`${classes["contact-status"]} ${classes["online"]}`}
+                      ></span>
+                      {contact?.participants &&
+                        contact.participants.map((participant) => {
+                          if (participant.id != userData.id) {
+                            return (
+                              <>
+                                <img src={participant.profile_pic} alt="" />
+                                <div
+                                  onClick={() => {
+                                    setChatID(contact.id);
+                                  }}
+                                  class={classes.meta}
+                                >
+                                  <p class={classes.name}>
+                                    {participant.first_name}{" "}
+                                    {participant.last_name}
+                                  </p>
+                                </div>
+                              </>
+                            );
+                          }
+                        })}
+                      {contact?.user && (
+                        <>
+                          <>
+                            <img src={contact.user.profile_pic} alt="" />
+                            <div
+                              class={classes.meta}
+                              onClick={() => {
+                                createAndJoin(contact.id);
+                              }}
+                            >
+                              <p class={classes.name}>
+                                {contact.user.first_name}{" "}
+                                {contact.user.last_name}
+                              </p>
+                            </div>
+                          </>
+                        </>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div id={classes["bottom-bar"]}>
-            <button id={classes.addcontact}>
+            <button
+              id={classes.addcontact}
+              onClick={() => {
+                mode === "contacts" ? setMode("add") : setMode("contacts");
+              }}
+            >
               <i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>
-              <span>Add contact</span>
-            </button>
-            <button id={classes.settings}>
-              <i class="fa fa-cog fa-fw" aria-hidden="true"></i>
-              <span>Settings</span>
+              <span>{mode === "contacts" ? "Add" : "View"} contact</span>
             </button>
           </div>
         </div>
         <div class={classes.content}>
           <div class={classes["contact-profile"]}>
-            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-            <p>ADHAM</p>
-            <div class={classes["social-media"]}>
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-              <i class="fa fa-instagram" aria-hidden="true"></i>
-            </div>
+            <img
+              src={
+                tempContacts
+                  .find((contact) => contact.id == chatID)
+                  ?.participants.find(
+                    (participant) => participant.id != userData.id
+                  ).profile_pic
+              }
+              alt=""
+            />
+            <p>
+              {
+                tempContacts
+                  .find((contact) => contact.id == chatID)
+                  ?.participants.find(
+                    (participant) => participant.id != userData.id
+                  ).first_name
+              }{" "}
+              {
+                tempContacts
+                  .find((contact) => contact.id == chatID)
+                  ?.participants.find(
+                    (participant) => participant.id != userData.id
+                  ).last_name
+              }
+            </p>
           </div>
           <div class={classes.messages}>
             <ul id={classes["chat-log"]}>
-              <li class={classes.sent}>
-                <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                <p>
-                  How the hell am I supposed to get a jury to believe you when I
-                  am not even sure that I do?!
-                </p>
-              </li>
-              <li class={classes.replies}>
-                <img
-                  src="http://emilcarlsson.se/assets/harveyspecter.png"
-                  alt=""
-                />
-                <p>
-                  When you're backed against the wall, break the god damn thing
-                  down.
-                </p>
-              </li>
+              {messages.length > 0 &&
+                messages.map((message, index) => {
+                  if (message.author == userData.username) {
+                    return (
+                      <>
+                        <li class={classes.sent}>
+                          <img src={userData.profile_picture} alt="" />
+                          <p>{message.content}</p>
+                        </li>
+                      </>
+                    );
+                  } else {
+                    return (
+                      <>
+                        <li class={classes.replies}>
+                          <img
+                            src={
+                              tempContacts
+                                .find((contact) => contact.id == chatID)
+                                ?.participants.find(
+                                  (participant) => participant.id != userData.id
+                                ).profile_pic
+                            }
+                            alt=""
+                          />
+                          <p>{message.content}</p>
+                        </li>
+                      </>
+                    );
+                  }
+                })}
+              {messages.length > 0 && (
+                <li ref={lastRef} id="dummy" class={classes.replies}>
+                  <p></p>
+                </li>
+              )}
             </ul>
           </div>
           <div class={classes["message-input"]}>
-            <div class={classes.wrap}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                submitMessage();
+              }}
+              class={classes.wrap}
+            >
               <input
                 id={classes["chat-message-input"]}
-                onChange={(e) => setMessage(e.target.value)}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+                value={message}
                 type="text"
                 placeholder="Write your message..."
               />
-              <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
               <button
                 id={classes["chat-message-submit"]}
                 class={classes.submit}
@@ -241,11 +400,10 @@ function Messages() {
               >
                 <i class="fa fa-paper-plane fa-fw" aria-hidden="true"></i>
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   );
 }
-export default Messages;

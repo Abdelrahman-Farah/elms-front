@@ -1,4 +1,4 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -6,12 +6,12 @@
   overflow: hidden;
 }
 
-.middle{
+.middle {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  height: 90%;
+  height: 100%;
 }
 
 ::-webkit-scrollbar-thumb {
