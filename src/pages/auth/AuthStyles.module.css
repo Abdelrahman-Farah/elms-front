@@ -34,7 +34,6 @@
 .image-card {
     width: 430px;
     height: 515px;
-    /* background-color: white; */
     position: relative;
     right: 0%;
     top: 50%;
@@ -87,9 +86,6 @@
     width: 450px;
     min-height: 500px;
     border-radius: 30px;
-
-
-    /* text-align: center; */
 }
 
 .register-form-card img {
@@ -173,18 +169,15 @@
     opacity: 0.65;
     margin-top: 1.6em;
     box-shadow: 0 0 9px rgba(104, 85, 224, 0.6);
-
 }
 
 .auth-btn:hover {
     opacity: 1;
-    /* box-shadow: 0 0 9px rgba(104, 85, 224, 0.6); */
 }
 
 .forgot {
     color: #999292;
     font-size: 17px;
-    /* margin-left: 5px; */
 }
 
 .error-msg::before {

@@ -23,7 +23,6 @@
 }
 
 .quiz {
-    /* background: linear-gradient(to right, #322b70, #446b9a); */
     width: 100%;
     font-size: 22px;
     font-weight: bold;
@@ -36,7 +35,6 @@
 .question {
     margin-bottom: 3em;
     width: 70%;
-    /* margin-bottom: 3em; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, .08), 0 4px 12px rgba(0, 0, 0, .08);
 }
 
@@ -49,7 +47,6 @@
     padding: 1.2em;
 
     display: flex;
-    /* justify-content: center; */
     align-items: center;
 }
 

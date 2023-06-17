@@ -15,7 +15,7 @@ function Calendar() {
     const [isLoading, setIsLoading] = useState(true);
     const [events, setEvents] = useState(null);
     async function fetchData() {
-        await fetch("http://127.0.0.1:8000/dashboard/user-events/", {
+        await fetch("https://elms.fly.dev/dashboard/user-events/", {
             method: "GET",
             headers: {
                 "Content-type": "application/json; charset=UTF-8",

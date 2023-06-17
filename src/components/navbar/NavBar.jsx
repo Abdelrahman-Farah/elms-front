@@ -10,16 +10,17 @@ import ELMS from '/src/assets/ELMS.svg';
 function NavBar() {
   return (
     <nav className={styles.navbar}>
-      <a className="" href="index.html">
+      <NavLink to='/'>
         <img className={styles.logo_image} src={logo} />
         <img className={styles.logo_text} src={ELMS} />
-      </a>
+      </NavLink>
 
       <div className={styles.links}>
-        <a className={styles.nav_link} href="#header">Home</a>
-        <a className={styles.nav_link} href="#features">Features</a>
-        <a className={styles.nav_link} href="#details">Details</a>
-        <a className={styles.nav_link} href="#video">Video</a>
+        <NavLink to='/' className={styles.nav_link}> Home </NavLink>
+        <NavLink to='/' className={styles.nav_link}> Features </NavLink>
+        <NavLink to='/' className={styles.nav_link}> Details </NavLink>
+        <NavLink to='/' className={styles.nav_link}> Video </NavLink>
+
 
         <NavLink
           to='login'

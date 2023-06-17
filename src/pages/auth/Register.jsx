@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 
@@ -9,6 +9,8 @@ import styles from './AuthStyles.module.css'
 
 import card_top from '/src/assets/auth/card-top.png';
 
+import { api_url } from '../../utils/getData';
+
 function Register() {
   const { register, handleSubmit, setError, formState: { errors } } = useForm();
 
@@ -16,7 +18,7 @@ function Register() {
   const [isRegisterationFinished, setIsRegisterationFinished] = useState(false);
 
   async function fetchData(data) {
-    await fetch("http://127.0.0.1:8000/auth/users/", {
+    await fetch(`${api_url}/auth/users/`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -107,7 +109,12 @@ function Register() {
 
               <button className={styles['auth-btn']}>Register</button>
             </form>
-            <p className={styles['new-member']} >Already have an account? <a href="/login" className={styles['new-member-link']}>Log in</a></p>
+            <p className={styles['new-member']} >
+              <span>Already have an account? </span>
+              <NavLink to='/login' className={styles['new-member-link']}>
+                Log in
+              </NavLink>
+            </p>
           </div>
         </div>
       </div>

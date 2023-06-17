@@ -352,13 +352,37 @@ export function deleteLearner(courseId, learnerId) {
   return fetch(
     api_url + `/dashboard/course/${courseId}/learners/${learnerId}/`,
     {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "content-type": "application/json; charset=UTF-8",
+        'content-type': 'application/json; charset=UTF-8',
         Authorization: auth,
       },
     }
-  ).then((response) => {
+  ).then(response => {
+    return response;
+  });
+}
+
+export function sendMeetingLink(
+  courseId,
+  description,
+  startTime,
+  endTime
+) {
+  const data = {
+    summary: 'meetingLink',
+    description: description,
+    start_time: startTime,
+    end_time: endTime,
+  };
+  return fetch(api_url + `/dashboard/course/${courseId}/events/`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json; charset=UTF-8',
+      Authorization: auth,
+    },
+    body: JSON.stringify(data),
+  }).then(response => {
     return response;
   });
 }
